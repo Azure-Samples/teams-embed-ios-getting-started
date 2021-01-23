@@ -15,29 +15,30 @@ class ViewController: UIViewController {
     
     private let meetingURL = "https://teams.microsoft.com/l/meetup-join/19%3ameeting_OTAxOWZkMjgtYjk5YS00Y2U5LWE2ZTEtNjBkYTNkY2JmZGI0%40thread.v2/0?context=%7b%22Tid%22%3a%2272f988bf-86f1-41af-91ab-2d7cd011db47%22%2c%22Oid%22%3a%226a2237f3-1226-44f7-b215-1092b63bafed%22%7d"
 
-    private let joinOptions = JoinOptions(fromDisplayName: "John Smith", isMicrophoneMuted: false, isVideoOff: false)
-    private var meetingSDK: MeetingSDK?
-    private var communicationUserCredential: CommunicationUserCredential?
+    private let joinOptions = JoinOptions(displayName: "John Smith", isMicrophoneMuted: false, isVideoOff: false)
+    private var meetingClient: MeetingClient?
+    private var communicationTokenCredential: CommunicationTokenCredential?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         do {
-            try communicationUserCredential = CommunicationUserCredential(token: acsToken)
-            meetingSDK = MeetingSDK(with: communicationUserCredential!, joinOptions: joinOptions)        }
+            try communicationTokenCredential = CommunicationTokenCredential(token: acsToken)
+            meetingClient = MeetingClient(with: communicationTokenCredential!)}
         catch {
             print("Failed to create communication user")
         }
     }
 
     @IBAction func joinMeetingPressed(_ sender: UIButton) {
-        print("Joining Meeting")
-        meetingSDK?.joinMeeting(with: meetingURL, joinOptions: joinOptions, completionHandler: { (error: Error?) in
+        joinMeeting()
+    }
+    
+    private func joinMeeting() {
+        meetingClient?.joinMeeting(with: meetingURL, joinOptions: joinOptions, completionHandler: { (error: Error?) in
             if (error != nil) {
-                print("Join failed: \(error!)")
+                print("Join meeting failed: \(error!)")
             }
         })
     }
-
 }
-
