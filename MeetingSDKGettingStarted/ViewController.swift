@@ -26,11 +26,11 @@ class ViewController: UIViewController {
             try communicationTokenCredential = CommunicationTokenCredential(token: acsToken)
             meetingClient = MeetingClient(with: communicationTokenCredential!)}
         catch {
-            print("Failed to create communication user")
+            print("Failed to create communication token credential")
         }
     }
 
-    @IBAction func joinMeetingPressed(_ sender: UIButton) {
+    @IBAction func joinMeetingTapped(_ sender: UIButton) {
         joinMeeting()
     }
     
