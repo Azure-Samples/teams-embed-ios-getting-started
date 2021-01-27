@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  MeetingSDKGettingStarted
+//  MeetingCompositeGettingStarted
 //
 //  Created by Patrick Latter on 2020-12-14.
 //

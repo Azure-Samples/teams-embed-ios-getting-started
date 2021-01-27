@@ -14,8 +14,8 @@ To complete this tutorial, you’ll need the following prerequisites:
 
 ## Code Structure
 
-- **./MeetingSDKGettingStarted/ViewController.swift:** Contains core UI and logic for calling SDK integration.
-- **./MeetingSDKGettingStarted.xcodeproj:** Xcode project for the sample.
+- **./MeetingCompositeGettingStarted/ViewController.swift:** Contains core UI and logic for calling SDK integration.
+- **./MeetingCompositeGettingStarted.xcodeproj:** Xcode project for the sample.
 
 ## Object model
 
@@ -32,11 +32,13 @@ The following classes and interfaces used in the quickstart handle some of the m
 
 1. Open an instance of PowerShell, Windows Terminal, Command Prompt or equivalent and navigate to the directory that you'd like to clone the sample to.
 2. `git clone https://github.com/Azure-Samples/meeting-sdk-ios-getting-started`
-3. With the `Access Token` procured in pre-requisites, add it to the **MeetingSDKGettingStarted/ViewController.swift** file. Assign your access token in line 35:
+3. With the `Access Token` procured in pre-requisites, add it to the **MeetingCompositeGettingStarted/ViewController.swift** file. Assign your access token in line 35:
    ```userCredential = try CommunicationUserCredential(token: "<USER_TOKEN_HERE>")```
 
 ## Run the sample
 
 You can build an run your app on iOS simulator by selecting **Product** > **Run** or by using the (&#8984;-R) keyboard shortcut.
 
-![Final look and feel of the quick start app](../Media/quickstart-android-call-echobot.png)
+![Final look and feel of the quick start app](Media/quick-start-join-meeting.png)
+
+![Final look and feel of the quick start app](Media/quick-start-meeting-joined.png)

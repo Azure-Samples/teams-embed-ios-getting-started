@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		777B489961120B0CC43006A1 /* Pods_MeetingSDKGettingStarted.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81010B3F73A4278DCB03FACB /* Pods_MeetingSDKGettingStarted.framework */; };
+		777B489961120B0CC43006A1 /* Pods_MeetingCompositeGettingStarted.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81010B3F73A4278DCB03FACB /* Pods_MeetingCompositeGettingStarted.framework */; };
 		A81CC745258804D6001FAB57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81CC744258804D6001FAB57 /* AppDelegate.swift */; };
 		A81CC747258804D6001FAB57 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81CC746258804D6001FAB57 /* SceneDelegate.swift */; };
 		A81CC749258804D6001FAB57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81CC748258804D6001FAB57 /* ViewController.swift */; };
@@ -33,9 +33,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2841E57F3E33AC6BCBAF0F9B /* Pods-MeetingSDKGettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingSDKGettingStarted.release.xcconfig"; path = "Target Support Files/Pods-MeetingSDKGettingStarted/Pods-MeetingSDKGettingStarted.release.xcconfig"; sourceTree = "<group>"; };
-		7332F33F208FFA62CD995213 /* Pods-MeetingSDKGettingStarted.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingSDKGettingStarted.debug.xcconfig"; path = "Target Support Files/Pods-MeetingSDKGettingStarted/Pods-MeetingSDKGettingStarted.debug.xcconfig"; sourceTree = "<group>"; };
-		81010B3F73A4278DCB03FACB /* Pods_MeetingSDKGettingStarted.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeetingSDKGettingStarted.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2841E57F3E33AC6BCBAF0F9B /* Pods-MeetingCompositeGettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingCompositeGettingStarted.release.xcconfig"; path = "Target Support Files/Pods-MeetingCompositeGettingStarted/Pods-MeetingCompositeGettingStarted.release.xcconfig"; sourceTree = "<group>"; };
+		7332F33F208FFA62CD995213 /* Pods-MeetingCompositeGettingStarted.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingCompositeGettingStarted.debug.xcconfig"; path = "Target Support Files/Pods-MeetingCompositeGettingStarted/Pods-MeetingCompositeGettingStarted.debug.xcconfig"; sourceTree = "<group>"; };
+		81010B3F73A4278DCB03FACB /* Pods_MeetingCompositeGettingStarted.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeetingCompositeGettingStarted.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A81CC741258804D6001FAB57 /* MeetingCompositeGettingStarted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingCompositeGettingStarted.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A81CC744258804D6001FAB57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A81CC746258804D6001FAB57 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				777B489961120B0CC43006A1 /* Pods_MeetingSDKGettingStarted.framework in Frameworks */,
+				777B489961120B0CC43006A1 /* Pods_MeetingCompositeGettingStarted.framework in Frameworks */,
 				A89F4E8825AD857A00125CAA /* MeetingSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,8 +63,8 @@
 		9422DE7242F1770056AE1FF6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7332F33F208FFA62CD995213 /* Pods-MeetingSDKGettingStarted.debug.xcconfig */,
-				2841E57F3E33AC6BCBAF0F9B /* Pods-MeetingSDKGettingStarted.release.xcconfig */,
+				7332F33F208FFA62CD995213 /* Pods-MeetingCompositeGettingStarted.debug.xcconfig */,
+				2841E57F3E33AC6BCBAF0F9B /* Pods-MeetingCompositeGettingStarted.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -72,7 +72,7 @@
 		A81CC738258804D6001FAB57 = {
 			isa = PBXGroup;
 			children = (
-				A81CC743258804D6001FAB57 /* MeetingSDKGettingStarted */,
+				A81CC743258804D6001FAB57 /* MeetingCompositeGettingStarted */,
 				A81CC742258804D6001FAB57 /* Products */,
 				A81CC75925880EC7001FAB57 /* Frameworks */,
 				9422DE7242F1770056AE1FF6 /* Pods */,
@@ -87,7 +87,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A81CC743258804D6001FAB57 /* MeetingSDKGettingStarted */ = {
+		A81CC743258804D6001FAB57 /* MeetingCompositeGettingStarted */ = {
 			isa = PBXGroup;
 			children = (
 				A81CC744258804D6001FAB57 /* AppDelegate.swift */,
@@ -98,14 +98,14 @@
 				A81CC74F258804D8001FAB57 /* LaunchScreen.storyboard */,
 				A81CC752258804D8001FAB57 /* Info.plist */,
 			);
-			path = MeetingSDKGettingStarted;
+			path = MeetingCompositeGettingStarted;
 			sourceTree = "<group>";
 		};
 		A81CC75925880EC7001FAB57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				A89F4E8725AD857A00125CAA /* MeetingSDK.framework */,
-				81010B3F73A4278DCB03FACB /* Pods_MeetingSDKGettingStarted.framework */,
+				81010B3F73A4278DCB03FACB /* Pods_MeetingCompositeGettingStarted.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -130,7 +130,7 @@
 			dependencies = (
 			);
 			name = MeetingCompositeGettingStarted;
-			productName = MeetingSDKGettingStarted;
+			productName = MeetingCompositeGettingStarted;
 			productReference = A81CC741258804D6001FAB57 /* MeetingCompositeGettingStarted.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -213,7 +213,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MeetingSDKGettingStarted-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-MeetingCompositeGettingStarted-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -226,15 +226,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MeetingSDKGettingStarted/Pods-MeetingSDKGettingStarted-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MeetingCompositeGettingStarted/Pods-MeetingCompositeGettingStarted-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MeetingSDKGettingStarted/Pods-MeetingSDKGettingStarted-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MeetingCompositeGettingStarted/Pods-MeetingCompositeGettingStarted-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MeetingSDKGettingStarted/Pods-MeetingSDKGettingStarted-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MeetingCompositeGettingStarted/Pods-MeetingCompositeGettingStarted-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -390,7 +390,7 @@
 		};
 		A81CC756258804D8001FAB57 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7332F33F208FFA62CD995213 /* Pods-MeetingSDKGettingStarted.debug.xcconfig */;
+			baseConfigurationReference = 7332F33F208FFA62CD995213 /* Pods-MeetingCompositeGettingStarted.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -402,13 +402,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				INFOPLIST_FILE = MeetingSDKGettingStarted/Info.plist;
+				INFOPLIST_FILE = MeetingCompositeGettingStarted/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.MeetingSDKGettingStarted;
+				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.MeetingCompositeGettingStarted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -420,7 +420,7 @@
 		};
 		A81CC757258804D8001FAB57 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2841E57F3E33AC6BCBAF0F9B /* Pods-MeetingSDKGettingStarted.release.xcconfig */;
+			baseConfigurationReference = 2841E57F3E33AC6BCBAF0F9B /* Pods-MeetingCompositeGettingStarted.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -432,13 +432,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
-				INFOPLIST_FILE = MeetingSDKGettingStarted/Info.plist;
+				INFOPLIST_FILE = MeetingCompositeGettingStarted/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.MeetingSDKGettingStarted;
+				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.MeetingCompositeGettingStarted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
