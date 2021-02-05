@@ -15,16 +15,15 @@ class ViewController: UIViewController {
     
     private let meetingURL = "https://teams.microsoft.com/l/meetup-join/19%3ameeting_OTAxOWZkMjgtYjk5YS00Y2U5LWE2ZTEtNjBkYTNkY2JmZGI0%40thread.v2/0?context=%7b%22Tid%22%3a%2272f988bf-86f1-41af-91ab-2d7cd011db47%22%2c%22Oid%22%3a%226a2237f3-1226-44f7-b215-1092b63bafed%22%7d"
 
-    private let joinOptions = JoinOptions(displayName: "John Smith", isMicrophoneMuted: false, isVideoOff: false)
-    private var meetingClient: MeetingClient?
+    private var meetingClient: MeetingUIClient?
     private var communicationTokenCredential: CommunicationTokenCredential?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         do {
             try communicationTokenCredential = CommunicationTokenCredential(token: acsToken)
-            meetingClient = MeetingClient(with: communicationTokenCredential!)}
+            meetingClient = MeetingUIClient(with: communicationTokenCredential!)}
         catch {
             print("Failed to create communication token credential")
         }
@@ -35,6 +34,8 @@ class ViewController: UIViewController {
     }
     
     private func joinMeeting() {
+        let joinOptions = JoinOptions(displayName: "John Smith")
+        
         meetingClient?.joinMeeting(with: meetingURL, joinOptions: joinOptions, completionHandler: { (error: Error?) in
             if (error != nil) {
                 print("Join meeting failed: \(error!)")
