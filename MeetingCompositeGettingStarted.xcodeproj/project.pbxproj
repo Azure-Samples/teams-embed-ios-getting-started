@@ -14,8 +14,8 @@
 		A81CC74C258804D6001FAB57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A81CC74A258804D6001FAB57 /* Main.storyboard */; };
 		A81CC74E258804D8001FAB57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A81CC74D258804D8001FAB57 /* Assets.xcassets */; };
 		A81CC751258804D8001FAB57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A81CC74F258804D8001FAB57 /* LaunchScreen.storyboard */; };
-		A89F4E8825AD857A00125CAA /* MeetingSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A89F4E8725AD857A00125CAA /* MeetingSDK.framework */; };
-		A89F4E8925AD857A00125CAA /* MeetingSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A89F4E8725AD857A00125CAA /* MeetingSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A8E2A19E25D1A7A600DF8AD3 /* MeetingUIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8E2A19D25D1A7A600DF8AD3 /* MeetingUIClient.framework */; };
+		A8E2A19F25D1A7A600DF8AD3 /* MeetingUIClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8E2A19D25D1A7A600DF8AD3 /* MeetingUIClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,7 +25,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A89F4E8925AD857A00125CAA /* MeetingSDK.framework in Embed Frameworks */,
+				A8E2A19F25D1A7A600DF8AD3 /* MeetingUIClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -44,7 +44,7 @@
 		A81CC74D258804D8001FAB57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A81CC750258804D8001FAB57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A81CC752258804D8001FAB57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A89F4E8725AD857A00125CAA /* MeetingSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MeetingSDK.framework; path = Frameworks/MeetingSDK.framework; sourceTree = "<group>"; };
+		A8E2A19D25D1A7A600DF8AD3 /* MeetingUIClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MeetingUIClient.framework; path = Frameworks/MeetingUIClient.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +53,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				777B489961120B0CC43006A1 /* Pods_MeetingCompositeGettingStarted.framework in Frameworks */,
-				A89F4E8825AD857A00125CAA /* MeetingSDK.framework in Frameworks */,
+				A8E2A19E25D1A7A600DF8AD3 /* MeetingUIClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,7 +104,7 @@
 		A81CC75925880EC7001FAB57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A89F4E8725AD857A00125CAA /* MeetingSDK.framework */,
+				A8E2A19D25D1A7A600DF8AD3 /* MeetingUIClient.framework */,
 				81010B3F73A4278DCB03FACB /* Pods_MeetingCompositeGettingStarted.framework */,
 			);
 			name = Frameworks;
@@ -323,7 +323,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -378,7 +378,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -403,7 +403,7 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = MeetingCompositeGettingStarted/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -433,7 +433,7 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = MeetingCompositeGettingStarted/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

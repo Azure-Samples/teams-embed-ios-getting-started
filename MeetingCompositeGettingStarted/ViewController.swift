@@ -7,7 +7,7 @@
 
 import UIKit
 import AzureCommunication
-import MeetingSDK
+import MeetingUIClient
 
 class ViewController: UIViewController {
 
