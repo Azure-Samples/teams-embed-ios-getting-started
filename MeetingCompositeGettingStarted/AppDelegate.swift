@@ -1,9 +1,8 @@
+//----------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 //
-//  AppDelegate.swift
-//  MeetingCompositeGettingStarted
-//
-//  Created by Patrick Latter on 2020-12-14.
-//
+// Module name: AppDelegate.swift
+//----------------------------------------------------------------
 
 import UIKit
 
