@@ -11,7 +11,7 @@ import TeamsAppSDK
 
 class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentityProviderDelegate {
   
-    private let acsToken = "ACS_TOKEN"
+    private let acsToken = "<ACS_TOKEN>"
     private let meetingURL = "<MEETING_URL>"
 
     private var meetingClient: MeetingUIClient?
