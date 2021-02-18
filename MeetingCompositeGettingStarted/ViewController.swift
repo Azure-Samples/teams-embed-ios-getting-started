@@ -20,7 +20,7 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentity
         super.viewDidLoad()
 
         do {
-            let communicationTokenRefreshOptions = CommunicationTokenRefreshOptions(initialToken: acsToken, refreshProactively: false, tokenRefresher: fetchTokenAsync(completionHandler:))
+            let communicationTokenRefreshOptions = CommunicationTokenRefreshOptions(initialToken: acsToken, refreshProactively: true, tokenRefresher: fetchTokenAsync(completionHandler:))
             let credential = try CommunicationTokenCredential(with: communicationTokenRefreshOptions)
             meetingClient = MeetingUIClient(with: credential)
             meetingClient?.meetingUIClientDelegate = self
