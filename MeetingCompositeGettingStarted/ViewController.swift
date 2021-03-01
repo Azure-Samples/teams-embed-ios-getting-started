@@ -35,12 +35,12 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentity
     }
     
     private func fetchTokenAsync(completionHandler: @escaping TokenRefreshOnCompletion) {
-         func getTokenFromServer(completionHandler: @escaping (String) -> Void) {
-              completionHandler(self.acsToken)
-         }
-         getTokenFromServer { newToken in
-             completionHandler(newToken, nil)
-         }
+        func getTokenFromServer(completionHandler: @escaping (String) -> Void) {
+            completionHandler(self.acsToken)
+        }
+        getTokenFromServer { newToken in
+            completionHandler(newToken, nil)
+        }
     }
     
     private func joinMeeting() {
@@ -55,7 +55,16 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentity
     }
     
     func meetingUIClient(didUpdateCallState callState: CallState) {
-        print("Call state has changed to: \(callState)")
+        switch callState {
+        case .connecting:
+            print("Call state has changed to 'Connecting'")
+        case .connected:
+            print("Call state has changed to 'Connected'")
+        case .waitingInLobby:
+            print("Call state has changed to 'Waiting in Lobby'")
+        case .ended:
+            print("Call state has changed to 'Ended'")
+        }
     }
     
     func meetingUIClient(didUpdateRemoteParticipantCount remoteParticpantCount: UInt) {
@@ -64,16 +73,17 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentity
     
     func avatarForUserMri(userMri: String, completionHandler completion: @escaping (UIImage?) -> Void) {
         if (userMri .starts(with: "8:teamsvisitor:")) {
-            // Anonymous user
+            // Anonymous teams user will start with prefix 8:teamsvistor:
             let image = UIImage (named: "avatarPink")
             completion(image!)
         }
         else if (userMri .starts(with: "8:orgid:")) {
-            // OrdID user
+            // OrgID user will start with prefix 8:orgid:
             let image = UIImage (named: "avatarDoctor")
             completion(image!)
         }
         else if (userMri .starts(with: "8:acs:")) {
+            // ACS user will start with prefix 8:acs:
             let image = UIImage (named: "avatarGreen")
             completion(image!)
         }
