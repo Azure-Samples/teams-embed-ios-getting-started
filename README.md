@@ -14,8 +14,8 @@ To complete this tutorial, you’ll need the following prerequisites:
 
 ## Code Structure
 
-- **./TeamsEmbedGettingStarted/ViewController.swift:** Contains core UI and logic for calling SDK integration.
-- **./TeamsEmbedGettingStarted.xcodeproj:** Xcode project for the sample.
+- **./TeamsEmbediOSGettingStarted/ViewController.swift:** Contains core UI and logic for calling SDK integration.
+- **./TeamsEmbediOSGettingStarted.xcodeproj:** Xcode project for the sample.
 
 ## Object model
 
@@ -32,7 +32,7 @@ The following classes and interfaces used in the quickstart handle some of the m
 
 1. Open an instance of PowerShell, Windows Terminal, Command Prompt or equivalent and navigate to the directory that you'd like to clone the sample to.
 2. `git clone https://github.com/Azure-Samples/teams-embed-ios-getting-started`
-3. With the `Access Token` procured in pre-requisites, add it to the **TeamsEmbedGettingStarted/ViewController.swift** file. Assign your access token in line 35:
+3. With the `Access Token` procured in pre-requisites, add it to the **TeamsEmbediOSGettingStarted/ViewController.swift** file. Assign your access token in line 35:
    ```userCredential = try CommunicationUserCredential(token: "<USER_TOKEN_HERE>")```
 
 ## Run the sample
