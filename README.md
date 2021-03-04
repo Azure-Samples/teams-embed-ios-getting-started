@@ -1,6 +1,6 @@
-# Quickstart: Add Meeting Composite to your iOS app
+# Quickstart: Add Teams Embed to your iOS app
 
-For full instructions on how to build this code sample from scratch, look at [Quickstart: Add meeting composite to your iOS app](https://docs.microsoft.com/en-us/azure/communication-services/quickstarts/meeting/getting-started-with-meeting-composite?pivots=platform-iOS)
+For full instructions on how to build this code sample from scratch, look at [Quickstart: Add Teams Embed to your iOS app](https://docs.microsoft.com/en-us/azure/communication-services/quickstarts/meeting/getting-started-with-teams-embed?pivots=platform-iOS)
 
 ## Prerequisites
 
@@ -14,25 +14,25 @@ To complete this tutorial, you’ll need the following prerequisites:
 
 ## Code Structure
 
-- **./MeetingCompositeGettingStarted/ViewController.swift:** Contains core UI and logic for calling SDK integration.
-- **./MeetingCompositeGettingStarted.xcodeproj:** Xcode project for the sample.
+- **./TeamsEmbedGettingStarted/ViewController.swift:** Contains core UI and logic for calling SDK integration.
+- **./TeamsEmbedGettingStarted.xcodeproj:** Xcode project for the sample.
 
 ## Object model
 
-The following classes and interfaces used in the quickstart handle some of the major features of the Azure Communication Services Meeting Composite library:
+The following classes and interfaces used in the quickstart handle some of the major features of the Azure Communication Services Teams Embed library:
 
 | Name                                  | Description                                                  |
 | ------------------------------------- | ------------------------------------------------------------ |
 | MeetingClient | The MeetingClient is the main entry point to the Meeting library.|
 | MeetingClientDelegate | The CallAgent is used to start and manage calls. |
-| JoinOptions | JoinOptions are used for configurable options such as display name, and is the microphone muted, etc. | 
+| MeetingJoinOptions | MeetingJoinOptions are used for configurable options such as display name| 
 | CallState | The CallState is used to for reporting call state changes. The options are as follows: connecting, waitingInLobby, connected, and ended. |
 
 ## Before running sample code
 
 1. Open an instance of PowerShell, Windows Terminal, Command Prompt or equivalent and navigate to the directory that you'd like to clone the sample to.
-2. `git clone https://github.com/Azure-Samples/meeting-sdk-ios-getting-started`
-3. With the `Access Token` procured in pre-requisites, add it to the **MeetingCompositeGettingStarted/ViewController.swift** file. Assign your access token in line 35:
+2. `git clone https://github.com/Azure-Samples/teams-embed-ios-getting-started`
+3. With the `Access Token` procured in pre-requisites, add it to the **TeamsEmbedGettingStarted/ViewController.swift** file. Assign your access token in line 35:
    ```userCredential = try CommunicationUserCredential(token: "<USER_TOKEN_HERE>")```
 
 ## Run the sample
