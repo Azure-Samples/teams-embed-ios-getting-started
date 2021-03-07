@@ -9,7 +9,7 @@ import AzureCommunication
 import MeetingUIClient
 import TeamsAppSDK
 
-class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentityProviderDelegate {
+class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentityProviderDelegate {  
   
     private let acsToken = "<ACS_TOKEN>"
     private let meetingURL = "<MEETING_URL>"
@@ -64,6 +64,8 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentity
             print("Call state has changed to 'Waiting in Lobby'")
         case .ended:
             print("Call state has changed to 'Ended'")
+        @unknown default:
+            print("Unsupported state")
         }
     }
     
