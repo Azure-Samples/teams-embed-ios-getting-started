@@ -7,7 +7,6 @@
 import UIKit
 import AzureCommunication
 import MeetingUIClient
-import TeamsAppSDK
 
 class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentityProviderDelegate {  
   
