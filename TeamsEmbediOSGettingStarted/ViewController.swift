@@ -13,7 +13,7 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentity
     private let acsToken = "<ACS_TOKEN>"
     private let meetingURL = "<MEETING_URL>"
 
-    private var meetingClient: MeetingUIClient?
+    private var meetingUIClient: MeetingUIClient?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +21,8 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentity
         do {
             let communicationTokenRefreshOptions = CommunicationTokenRefreshOptions(initialToken: acsToken, refreshProactively: true, tokenRefresher: fetchTokenAsync(completionHandler:))
             let credential = try CommunicationTokenCredential(with: communicationTokenRefreshOptions)
-            meetingClient = MeetingUIClient(with: credential)
-            meetingClient?.meetingUIClientDelegate = self
+            meetingUIClient = MeetingUIClient(with: credential)
+            meetingUIClient?.meetingUIClientDelegate = self
         }
         catch {
             print("Failed to create communication token credential")
@@ -43,10 +43,10 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentity
     }
     
     private func joinMeeting() {
-        meetingClient?.meetingIdentityProviderDelegate = self
+        meetingUIClient?.meetingIdentityProviderDelegate = self
         let meetingJoinOptions = MeetingJoinOptions(displayName: "John Smith")
 
-        meetingClient?.join(meetingUrl: meetingURL, meetingJoinOptions: meetingJoinOptions, completionHandler: { (error: Error?) in
+        meetingUIClient?.join(meetingUrl: meetingURL, meetingJoinOptions: meetingJoinOptions, completionHandler: { (error: Error?) in
             if (error != nil) {
                 print("Join meeting failed: \(error!)")
             }
