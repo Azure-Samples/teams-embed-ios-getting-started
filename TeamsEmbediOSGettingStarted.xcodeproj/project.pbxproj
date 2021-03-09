@@ -13,22 +13,22 @@
 		A81CC74C258804D6001FAB57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A81CC74A258804D6001FAB57 /* Main.storyboard */; };
 		A81CC74E258804D8001FAB57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A81CC74D258804D8001FAB57 /* Assets.xcassets */; };
 		A81CC751258804D8001FAB57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A81CC74F258804D8001FAB57 /* LaunchScreen.storyboard */; };
-		A857CA6F25F6A73000DF4CA2 /* MeetingUIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A857CA6D25F6A73000DF4CA2 /* MeetingUIClient.framework */; };
-		A857CA7025F6A73000DF4CA2 /* MeetingUIClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A857CA6D25F6A73000DF4CA2 /* MeetingUIClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A857CA7125F6A73000DF4CA2 /* TeamsAppSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A857CA6E25F6A73000DF4CA2 /* TeamsAppSDK.framework */; };
-		A857CA7225F6A73000DF4CA2 /* TeamsAppSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A857CA6E25F6A73000DF4CA2 /* TeamsAppSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D97BAA0544D9661FA0516AF8 /* Pods_TeamsEmbediOSGettingStarted.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37718113AA8B764119CFCC1B /* Pods_TeamsEmbediOSGettingStarted.framework */; };
+		F81BC91C25F82FD600150A78 /* MeetingUIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91825F82FD400150A78 /* MeetingUIClient.framework */; };
+		F81BC91D25F82FD600150A78 /* MeetingUIClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91825F82FD400150A78 /* MeetingUIClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F81BC91F25F82FD700150A78 /* TeamsAppSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */; };
+		F81BC92025F82FD700150A78 /* TeamsAppSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A81CC75D25880EC7001FAB57 /* Embed Frameworks */ = {
+		F81BC91E25F82FD600150A78 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A857CA7225F6A73000DF4CA2 /* TeamsAppSDK.framework in Embed Frameworks */,
-				A857CA7025F6A73000DF4CA2 /* MeetingUIClient.framework in Embed Frameworks */,
+				F81BC92025F82FD700150A78 /* TeamsAppSDK.framework in Embed Frameworks */,
+				F81BC91D25F82FD600150A78 /* MeetingUIClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,9 +46,9 @@
 		A81CC74D258804D8001FAB57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A81CC750258804D8001FAB57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A81CC752258804D8001FAB57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A857CA6D25F6A73000DF4CA2 /* MeetingUIClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MeetingUIClient.framework; path = ../../Projects/TeamsEmbedTestGettingStarted/Frameworks/MeetingUIClient.framework; sourceTree = "<group>"; };
-		A857CA6E25F6A73000DF4CA2 /* TeamsAppSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TeamsAppSDK.framework; path = ../../Projects/TeamsEmbedTestGettingStarted/Frameworks/TeamsAppSDK.framework; sourceTree = "<group>"; };
 		B19FC305E7AA4E84917EB531 /* Pods-TeamsEmbediOSGettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamsEmbediOSGettingStarted.release.xcconfig"; path = "Target Support Files/Pods-TeamsEmbediOSGettingStarted/Pods-TeamsEmbediOSGettingStarted.release.xcconfig"; sourceTree = "<group>"; };
+		F81BC91825F82FD400150A78 /* MeetingUIClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MeetingUIClient.framework; path = Frameworks/MeetingUIClient.framework; sourceTree = "<group>"; };
+		F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TeamsAppSDK.framework; path = Frameworks/TeamsAppSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +56,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F81BC91C25F82FD600150A78 /* MeetingUIClient.framework in Frameworks */,
+				F81BC91F25F82FD700150A78 /* TeamsAppSDK.framework in Frameworks */,
 				D97BAA0544D9661FA0516AF8 /* Pods_TeamsEmbediOSGettingStarted.framework in Frameworks */,
-				A857CA7125F6A73000DF4CA2 /* TeamsAppSDK.framework in Frameworks */,
-				A857CA6F25F6A73000DF4CA2 /* MeetingUIClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,8 +109,8 @@
 		A81CC75925880EC7001FAB57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A857CA6D25F6A73000DF4CA2 /* MeetingUIClient.framework */,
-				A857CA6E25F6A73000DF4CA2 /* TeamsAppSDK.framework */,
+				F81BC91825F82FD400150A78 /* MeetingUIClient.framework */,
+				F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */,
 				37718113AA8B764119CFCC1B /* Pods_TeamsEmbediOSGettingStarted.framework */,
 			);
 			name = Frameworks;
@@ -127,9 +127,9 @@
 				A81CC73D258804D6001FAB57 /* Sources */,
 				A81CC73E258804D6001FAB57 /* Frameworks */,
 				A81CC73F258804D6001FAB57 /* Resources */,
-				A81CC75D25880EC7001FAB57 /* Embed Frameworks */,
 				A8CB2B30258A86C4004A7CC5 /* ShellScript */,
 				4C5ED955FF18298200062C7D /* [CP] Embed Pods Frameworks */,
+				F81BC91E25F82FD600150A78 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
