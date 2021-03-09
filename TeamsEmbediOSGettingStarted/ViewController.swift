@@ -8,7 +8,7 @@ import UIKit
 import AzureCommunication
 import MeetingUIClient
 
-class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentityProviderDelegate {  
+class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClientIdentityProviderDelegate, MeetingUIClientUserEventDelegate {
   
     private let acsToken = "<ACS_TOKEN>"
     private let meetingURL = "<MEETING_URL>"
@@ -43,9 +43,9 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentity
     }
     
     private func joinMeeting() {
-        meetingUIClient?.meetingIdentityProviderDelegate = self
-        let meetingJoinOptions = MeetingJoinOptions(displayName: "John Smith")
-
+        meetingUIClient?.meetingUIClientIdentityProviderDelegate = self
+        meetingUIClient?.meetingUIClientUserEventDelegate = self
+        let meetingJoinOptions = MeetingJoinOptions(displayName: "John Smith", enablePhotoSharing: false)
         meetingUIClient?.join(meetingUrl: meetingURL, meetingJoinOptions: meetingJoinOptions, completionHandler: { (error: Error?) in
             if (error != nil) {
                 print("Join meeting failed: \(error!)")
@@ -72,24 +72,36 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingIdentity
         print("Remote participant count has changed to: \(remoteParticpantCount)")
     }
     
-    func avatarForUserMri(userMri: String, completionHandler completion: @escaping (UIImage?) -> Void) {
-        if (userMri .starts(with: "8:teamsvisitor:")) {
+    func avatarFor(userIdentifier: String, completionHandler: @escaping (UIImage?) -> Void) {
+        if (userIdentifier.starts(with: "8:teamsvisitor:")) {
             // Anonymous teams user will start with prefix 8:teamsvistor:
             let image = UIImage (named: "avatarPink")
-            completion(image!)
+            completionHandler(image!)
         }
-        else if (userMri .starts(with: "8:orgid:")) {
+        else if (userIdentifier.starts(with: "8:orgid:")) {
             // OrgID user will start with prefix 8:orgid:
             let image = UIImage (named: "avatarDoctor")
-            completion(image!)
+            completionHandler(image!)
         }
-        else if (userMri .starts(with: "8:acs:")) {
+        else if (userIdentifier.starts(with: "8:acs:")) {
             // ACS user will start with prefix 8:acs:
             let image = UIImage (named: "avatarGreen")
-            completion(image!)
+            completionHandler(image!)
         }
         else {
-            completion(nil)
+            completionHandler(nil)
         }
+    }
+    
+    func displayNameFor(userIdentifier: String, completionHandler: @escaping (String?) -> Void) {
+        completionHandler(nil)
+    }
+    
+    func subTitleFor(userIdentifier: String, completionHandler: @escaping (String?) -> Void) {
+        completionHandler(nil)
+    }
+    
+    func onParticipantClicked(userIdentifier: String) {
+        print("Participant clicked: \(userIdentifier)")
     }
 }
