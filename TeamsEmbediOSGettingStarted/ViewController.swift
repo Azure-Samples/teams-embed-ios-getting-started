@@ -8,7 +8,7 @@ import UIKit
 import AzureCommunication
 import MeetingUIClient
 
-class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClientIdentityProviderDelegate, MeetingUIClientUserEventDelegate {
+class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClientIdentityProviderDelegate {
   
     private let acsToken = "<ACS_TOKEN>"
     private let meetingURL = "<MEETING_URL>"
@@ -44,7 +44,6 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClient
     
     private func joinMeeting() {
         meetingUIClient?.meetingUIClientIdentityProviderDelegate = self
-        meetingUIClient?.meetingUIClientUserEventDelegate = self
         let meetingJoinOptions = MeetingJoinOptions(displayName: "John Smith", enablePhotoSharing: false)
         meetingUIClient?.join(meetingUrl: meetingURL, meetingJoinOptions: meetingJoinOptions, completionHandler: { (error: Error?) in
             if (error != nil) {
@@ -91,17 +90,5 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClient
         else {
             completionHandler(nil)
         }
-    }
-    
-    func displayNameFor(userIdentifier: String, completionHandler: @escaping (String?) -> Void) {
-        completionHandler(nil)
-    }
-    
-    func subTitleFor(userIdentifier: String, completionHandler: @escaping (String?) -> Void) {
-        completionHandler(nil)
-    }
-    
-    func onParticipantClicked(userIdentifier: String) {
-        print("Participant clicked: \(userIdentifier)")
     }
 }
