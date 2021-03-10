@@ -91,4 +91,12 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClient
             completionHandler(nil)
         }
     }
+    
+    func displayNameFor(userIdentifier: String, completionHandler: @escaping (String?) -> Void) {
+        completionHandler(nil)
+    }
+    
+    func subTitleFor(userIdentifier: String, completionHandler: @escaping (String?) -> Void) {
+        completionHandler(nil)
+    }
 }
