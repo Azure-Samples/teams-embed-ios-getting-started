@@ -44,7 +44,7 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClient
     
     private func joinMeeting() {
         meetingUIClient?.meetingUIClientIdentityProviderDelegate = self
-        let meetingJoinOptions = MeetingJoinOptions(displayName: "John Smith", enablePhotoSharing: false)
+        let meetingJoinOptions = MeetingJoinOptions(displayName: "John Smith")
         meetingUIClient?.join(meetingUrl: meetingURL, meetingJoinOptions: meetingJoinOptions, completionHandler: { (error: Error?) in
             if (error != nil) {
                 print("Join meeting failed: \(error!)")
