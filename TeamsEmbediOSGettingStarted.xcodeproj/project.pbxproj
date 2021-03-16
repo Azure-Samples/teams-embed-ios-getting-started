@@ -127,9 +127,9 @@
 				A81CC73D258804D6001FAB57 /* Sources */,
 				A81CC73E258804D6001FAB57 /* Frameworks */,
 				A81CC73F258804D6001FAB57 /* Resources */,
-				A8CB2B30258A86C4004A7CC5 /* ShellScript */,
 				4C5ED955FF18298200062C7D /* [CP] Embed Pods Frameworks */,
 				F81BC91E25F82FD600150A78 /* Embed Frameworks */,
+				A8CB2B30258A86C4004A7CC5 /* Sign and Move Sub Frameworks */,
 			);
 			buildRules = (
 			);
@@ -204,7 +204,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TeamsEmbediOSGettingStarted/Pods-TeamsEmbediOSGettingStarted-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A8CB2B30258A86C4004A7CC5 /* ShellScript */ = {
+		A8CB2B30258A86C4004A7CC5 /* Sign and Move Sub Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -213,6 +213,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Sign and Move Sub Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -402,7 +403,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UBF8T346G9;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -414,7 +415,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.TeamsEmbediOSGettingStarted;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.TeamsEmbediOSGettingStarted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -432,7 +433,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UBF8T346G9;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -444,7 +445,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.TeamsEmbediOSGettingStarted;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.TeamsEmbediOSGettingStarted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
