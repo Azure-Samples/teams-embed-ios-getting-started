@@ -17,6 +17,16 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClient
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
+        button.backgroundColor = .black
+        button.setTitle("Join Meeting", for: .normal)
+        button.addTarget(self, action: #selector(joinMeetingTapped), for: .touchUpInside)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(button)
+        button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 
         do {
             let communicationTokenRefreshOptions = CommunicationTokenRefreshOptions(initialToken: acsToken, refreshProactively: true, tokenRefresher: fetchTokenAsync(completionHandler:))
