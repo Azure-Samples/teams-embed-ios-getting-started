@@ -10,7 +10,6 @@ To complete this tutorial, you’ll need the following prerequisites:
 - A Mac running [Xcode](https://go.microsoft.com/fwLink/p/?LinkID=266532), along with a valid developer certificate installed into your Keychain.
 - A deployed Communication Services resource. [Create a Communication Services resource](https://docs.microsoft.com/en-us/azure/communication-services/quickstarts/create-communication-resource).
 - A [User Access Token](https://docs.microsoft.com/en-us/azure/communication-services/quickstarts/access-tokens?pivots=programming-language-csharp) for your Azure Communication Service.
-- Create a `Podfile` for your application to fetch `AzureCommunication.framework` using CocoaPods.
 - Download the `Teams Embed` frameworks
 
 ## Code Structure
@@ -33,10 +32,12 @@ The following classes and interfaces used in the quickstart handle some of the m
 
 1. Open an instance of PowerShell, Windows Terminal, Command Prompt or equivalent and navigate to the directory that you'd like to clone the sample to.
 2. `git clone https://github.com/Azure-Samples/teams-embed-ios-getting-started`
-3. With the `Access Token` procured in pre-requisites, in the **TeamsEmbediOSGettingStarted/ViewController.swift** file, replace `<USER_ACCESS_TOKEN>`.
-4. In the **TeamsEmbediOSGettingStarted/ViewController.swift** file, replace `<MEETING_URL>` with your a teams meeting url.
-5. Run `Pod Install` in your project root.
-6. Copy the `TeamsAppSDK.framework` and the `MeetingUIClient.framework` to the `Frameworks` folder in the project root
+3. Run `Pod Install` in your project root.
+4. Open TeamsEmbediOSGettingStarted.xcworkspace
+5. Copy the `TeamsAppSDK.framework` and the `MeetingUIClient.framework` to the `Frameworks` folder in the project root
+6. Select development team under Signing and Capabilities.
+7. With the `Access Token` procured in pre-requisites, in the **TeamsEmbediOSGettingStarted/ViewController.swift** file, replace `<USER_ACCESS_TOKEN>`.
+8. In the **TeamsEmbediOSGettingStarted/ViewController.swift** file, replace `<MEETING_URL>` with your a teams meeting url.
 
 ## Run the sample
 
