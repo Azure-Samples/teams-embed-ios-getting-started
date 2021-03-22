@@ -25,7 +25,8 @@ The following classes and interfaces used in the quickstart handle some of the m
 | ------------------------------------- | ------------------------------------------------------------ |
 | MeetingUIClient | The MeetingUIClient is the main entry point to the Teams Embed library. |
 | MeetingUIClientDelegate | The MeetingUIClientDelegate is used to receive events, such as changes in call state. |
-| MeetingJoinOptions | MeetingJoinOptions are used for configurable options such as display name. | 
+| MeetingUIClientIdentityProviderDelegate | The MeetingUIClientIdentityProviderDelegate is used to map avatars to users in a meeting. |
+| MeetingJoinOptions | MeetingJoinOptions are used for configurable options such as display name. |
 | CallState | The CallState is used to for reporting call state changes. The options are as follows: connecting, waitingInLobby, connected, and ended. |
 
 ## Before running sample code
