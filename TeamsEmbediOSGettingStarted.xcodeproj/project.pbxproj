@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A81CC745258804D6001FAB57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81CC744258804D6001FAB57 /* AppDelegate.swift */; };
-		A81CC747258804D6001FAB57 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81CC746258804D6001FAB57 /* SceneDelegate.swift */; };
 		A81CC749258804D6001FAB57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81CC748258804D6001FAB57 /* ViewController.swift */; };
 		A81CC74C258804D6001FAB57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A81CC74A258804D6001FAB57 /* Main.storyboard */; };
 		A81CC74E258804D8001FAB57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A81CC74D258804D8001FAB57 /* Assets.xcassets */; };
@@ -40,7 +39,6 @@
 		9C132A659499855259C96D82 /* Pods-TeamsEmbediOSGettingStarted.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamsEmbediOSGettingStarted.debug.xcconfig"; path = "Target Support Files/Pods-TeamsEmbediOSGettingStarted/Pods-TeamsEmbediOSGettingStarted.debug.xcconfig"; sourceTree = "<group>"; };
 		A81CC741258804D6001FAB57 /* TeamsEmbediOSGettingStarted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamsEmbediOSGettingStarted.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A81CC744258804D6001FAB57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A81CC746258804D6001FAB57 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A81CC748258804D6001FAB57 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A81CC74B258804D6001FAB57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A81CC74D258804D8001FAB57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -96,7 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				A81CC744258804D6001FAB57 /* AppDelegate.swift */,
-				A81CC746258804D6001FAB57 /* SceneDelegate.swift */,
 				A81CC748258804D6001FAB57 /* ViewController.swift */,
 				A81CC74A258804D6001FAB57 /* Main.storyboard */,
 				A81CC74D258804D8001FAB57 /* Assets.xcassets */,
@@ -253,7 +250,6 @@
 			files = (
 				A81CC749258804D6001FAB57 /* ViewController.swift in Sources */,
 				A81CC745258804D6001FAB57 /* AppDelegate.swift in Sources */,
-				A81CC747258804D6001FAB57 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,7 +406,7 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = TeamsEmbediOSGettingStarted/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -440,7 +436,7 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = TeamsEmbediOSGettingStarted/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
