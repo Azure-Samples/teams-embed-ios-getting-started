@@ -17,6 +17,8 @@
 		F81BC91D25F82FD600150A78 /* MeetingUIClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91825F82FD400150A78 /* MeetingUIClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F81BC91F25F82FD700150A78 /* TeamsAppSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */; };
 		F81BC92025F82FD700150A78 /* TeamsAppSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F8E5ADFE26263E0800879512 /* MsaiSdkCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E5ADFC26263E0500879512 /* MsaiSdkCore.framework */; };
+		F8E5ADFF26263E0800879512 /* MsaiSdkCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F8E5ADFC26263E0500879512 /* MsaiSdkCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +29,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				F81BC92025F82FD700150A78 /* TeamsAppSDK.framework in Embed Frameworks */,
+				F8E5ADFF26263E0800879512 /* MsaiSdkCore.framework in Embed Frameworks */,
 				F81BC91D25F82FD600150A78 /* MeetingUIClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -47,6 +50,7 @@
 		B19FC305E7AA4E84917EB531 /* Pods-TeamsEmbediOSGettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamsEmbediOSGettingStarted.release.xcconfig"; path = "Target Support Files/Pods-TeamsEmbediOSGettingStarted/Pods-TeamsEmbediOSGettingStarted.release.xcconfig"; sourceTree = "<group>"; };
 		F81BC91825F82FD400150A78 /* MeetingUIClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MeetingUIClient.framework; path = Frameworks/MeetingUIClient.framework; sourceTree = "<group>"; };
 		F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TeamsAppSDK.framework; path = Frameworks/TeamsAppSDK.framework; sourceTree = "<group>"; };
+		F8E5ADFC26263E0500879512 /* MsaiSdkCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MsaiSdkCore.framework; path = Frameworks/MsaiSdkCore.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 			files = (
 				F81BC91C25F82FD600150A78 /* MeetingUIClient.framework in Frameworks */,
 				F81BC91F25F82FD700150A78 /* TeamsAppSDK.framework in Frameworks */,
+				F8E5ADFE26263E0800879512 /* MsaiSdkCore.framework in Frameworks */,
 				D97BAA0544D9661FA0516AF8 /* Pods_TeamsEmbediOSGettingStarted.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,6 +111,7 @@
 		A81CC75925880EC7001FAB57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8E5ADFC26263E0500879512 /* MsaiSdkCore.framework */,
 				F81BC91825F82FD400150A78 /* MeetingUIClient.framework */,
 				F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */,
 				37718113AA8B764119CFCC1B /* Pods_TeamsEmbediOSGettingStarted.framework */,
