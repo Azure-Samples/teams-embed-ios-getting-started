@@ -13,7 +13,7 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClient
     private let acsToken = "<ACS_TOKEN>"
     private let meetingURL = "<MEETING_URL>"
 
-    private let groupCallId = UUID.init(uuidString: "29228d3e-040e-4656-a70e-890ab4e173e7")
+    private let groupCallId = UUID.init(uuidString: "<GROUP_ID>")
     
     private var meetingUIClient: MeetingUIClient?
     
