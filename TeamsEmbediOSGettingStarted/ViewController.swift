@@ -60,12 +60,19 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClient
             let credential = try CommunicationTokenCredential(withOptions: communicationTokenRefreshOptions)
             meetingUIClient = MeetingUIClient(with: credential)
             meetingUIClient?.meetingUIClientDelegate = self
+            meetingUIClient?.set(iconConfig: self.getIconConfig())
         }
         catch {
             print("Failed to create communication token credential")
         }
     }
 
+    func getIconConfig() -> Dictionary<MeetingUIClientIconType, String> {
+        var iconConfig = Dictionary<MeetingUIClientIconType, String>()
+        iconConfig.updateValue("mic_off", forKey: MeetingUIClientIconType.MicOff)
+        return iconConfig
+    }
+    
     @IBAction func joinMeetingTapped(_ sender: UIButton) {
         joinMeeting()
     }
