@@ -20,8 +20,6 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string></string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string></string>
 	<key>NSCameraUsageDescription</key>
@@ -29,6 +27,10 @@
 	<key>NSContactsUsageDescription</key>
 	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
+	<string></string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string></string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>

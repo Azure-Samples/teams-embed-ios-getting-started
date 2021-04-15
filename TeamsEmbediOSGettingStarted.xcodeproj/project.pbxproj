@@ -19,6 +19,7 @@
 		F81BC92025F82FD700150A78 /* TeamsAppSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F8E5ADFE26263E0800879512 /* MsaiSdkCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E5ADFC26263E0500879512 /* MsaiSdkCore.framework */; };
 		F8E5ADFF26263E0800879512 /* MsaiSdkCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F8E5ADFC26263E0500879512 /* MsaiSdkCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F8E5B4432627C81F00879512 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E5B4422627C81F00879512 /* Button.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +52,7 @@
 		F81BC91825F82FD400150A78 /* MeetingUIClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MeetingUIClient.framework; path = Frameworks/MeetingUIClient.framework; sourceTree = "<group>"; };
 		F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TeamsAppSDK.framework; path = Frameworks/TeamsAppSDK.framework; sourceTree = "<group>"; };
 		F8E5ADFC26263E0500879512 /* MsaiSdkCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MsaiSdkCore.framework; path = Frameworks/MsaiSdkCore.framework; sourceTree = "<group>"; };
+		F8E5B4422627C81F00879512 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				A81CC744258804D6001FAB57 /* AppDelegate.swift */,
 				A81CC748258804D6001FAB57 /* ViewController.swift */,
+				F8E5B4422627C81F00879512 /* Button.swift */,
 				A81CC74A258804D6001FAB57 /* Main.storyboard */,
 				A81CC74D258804D8001FAB57 /* Assets.xcassets */,
 				A81CC74F258804D8001FAB57 /* LaunchScreen.storyboard */,
@@ -255,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A81CC749258804D6001FAB57 /* ViewController.swift in Sources */,
+				F8E5B4432627C81F00879512 /* Button.swift in Sources */,
 				A81CC745258804D6001FAB57 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
