@@ -30,7 +30,6 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClient
         joinMeetingButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         joinMeetingButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 
-        statusLabel.backgroundColor = .black
         statusLabel.textColor = .systemBlue
         statusLabel.text = "No active call"
         
