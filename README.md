@@ -24,10 +24,15 @@ The following classes and interfaces used in the quickstart handle some of the m
 | Name                                  | Description                                                  |
 | ------------------------------------- | ------------------------------------------------------------ |
 | MeetingUIClient | The MeetingUIClient is the main entry point to the Teams Embed library. |
+| MeetingUIClientMeetingJoinOptions | MeetingUIClientMeetingJoinOptions are used for configurable options such as display name. |
+| MeetingUIClientGroupCallJoinOptions | MeetingUIClientMeetingJoinOptions are used for configurable options such as display name. |
+| MeetingUIClientTeamsMeetingLinkLocator | MeetingUIClientTeamsMeetingLinkLocator is used to set the meeting URL for joining a meeting. |
+| MeetingUIClientGroupCallLocator | MeetingUIClientGroupCallLocator is used for setting the group id to join. |
+| MeetingUIClientCallState | The CallState is used to for reporting call state changes. The options are as follows: connecting, waitingInLobby, connected, and ended. |
 | MeetingUIClientDelegate | The MeetingUIClientDelegate is used to receive events, such as changes in call state. |
-| MeetingUIClientIdentityProviderDelegate | The MeetingUIClientIdentityProviderDelegate is used to map avatars to users in a meeting. |
-| MeetingJoinOptions | MeetingJoinOptions are used for configurable options such as display name. |
-| CallState | The CallState is used to for reporting call state changes. The options are as follows: connecting, waitingInLobby, connected, and ended. |
+| MeetingUIClientIdentityProviderDelegate | The MeetingUIClientIdentityProviderDelegate is used to map user details to the users in a meeting. |
+| MeetingUIClientUserEventDelegate | The MeetingUIClientUserEventDelegate is used provide delegate calls in case user has click in the UI on specific elements. |
+
 
 ## Before running sample code
 
@@ -35,10 +40,11 @@ The following classes and interfaces used in the quickstart handle some of the m
 2. `git clone https://github.com/Azure-Samples/teams-embed-ios-getting-started`
 3. Run `Pod Install` in your project root.
 4. Open TeamsEmbediOSGettingStarted.xcworkspace
-5. Copy the `TeamsAppSDK.framework` and the `MeetingUIClient.framework` to the `Frameworks` folder in the project root
+5. Copy the `TeamsAppSDK.framework`, the `MeetingUIClient.framework` and other frameworks provided in the release bundle to the `Frameworks` folder in the project root
 6. Select development team under Signing and Capabilities.
 7. With the `Access Token` procured in pre-requisites, in the **TeamsEmbediOSGettingStarted/ViewController.swift** file, replace `<USER_ACCESS_TOKEN>`.
-8. In the **TeamsEmbediOSGettingStarted/ViewController.swift** file, replace `<MEETING_URL>` with your a teams meeting url.
+8. In the **TeamsEmbediOSGettingStarted/ViewController.swift** file, replace `<MEETING_URL>` with your a Microsoft Teams meeting url.
+9. In the **TeamsEmbediOSGettingStarted/ViewController.swift** file, replace `<GROUP_ID>` with your a goup id UUID.
 
 ## Run the sample
 
