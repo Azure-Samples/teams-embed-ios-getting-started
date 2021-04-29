@@ -112,6 +112,10 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClient
         meetingUIClient?.meetingUIClientIdentityProviderDelegate = self
         meetingUIClient?.meetingUIClientUserEventDelegate = self
         let groupJoinOptions = MeetingUIClientGroupCallJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true, shouldEnablePreJoinView: true)
+        guard self.groupCallId != nil else {
+            print("Not valid group ID")
+            return
+        }
         let groupLocator = MeetingUIClientGroupCallLocator(groupId: self.groupCallId!)
         meetingUIClient?.join(meetingLocator: groupLocator, joinCallOptions: groupJoinOptions, completionHandler: { (error: Error?) in
             if (error != nil) {
@@ -183,12 +187,18 @@ class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClient
             let displayName = "Acs User"
             completionHandler(displayName)
         }
+        else {
+            completionHandler(nil)
+        }
     }
     
     func subTitleFor(userIdentifier: String, completionHandler: @escaping (String?) -> Void) {
         if (userIdentifier.starts(with: "8:acs:")) {
             let displayName = "ACS Subtitle Example"
             completionHandler(displayName)
+        }
+        else {
+            completionHandler(nil)
         }
     }
  
