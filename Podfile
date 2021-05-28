@@ -3,12 +3,12 @@ use_frameworks!
 
 target 'TeamsEmbediOSGettingStarted' do
 
-pod 'AzureCommunication', '~> 1.0.0-beta.11'
+pod 'AzureCommunicationCommon', '1.0.0'
 
 end
 
 azure_libs = [
-'AzureCommunication',
+'AzureCommunicationCommon',
 'AzureCore']
 
 post_install do |installer|

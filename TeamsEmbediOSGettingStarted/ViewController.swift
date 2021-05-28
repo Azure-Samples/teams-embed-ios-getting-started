@@ -5,205 +5,147 @@
 //----------------------------------------------------------------
 
 import UIKit
-import AzureCommunication
-import MeetingUIClient
 
-class ViewController: UIViewController, MeetingUIClientDelegate, MeetingUIClientIdentityProviderDelegate, MeetingUIClientUserEventDelegate {
+class ViewController: UIViewController {
 
-    private let acsToken = "<ACS_TOKEN>"
-    private let meetingURL = "<MEETING_URL>"
-
-    private let groupCallId = UUID.init(uuidString: "<GROUP_ID>")
+    private let acsToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjEwMiIsIng1dCI6IjNNSnZRYzhrWVNLd1hqbEIySmx6NTRQVzNBYyIsInR5cCI6IkpXVCJ9.eyJza3lwZWlkIjoiYWNzOjcxZWM1OTBiLWNiYWQtNDkwYy05OWM1LWI1NzhiZGFjZGU1NF8wMDAwMDAwYS00ZjVhLWRkNDgtMjhjNS01OTNhMGQwMDFkNTAiLCJzY3AiOjE3OTIsImNzaSI6IjE2MjIxNDY2MjgiLCJpYXQiOjE2MjIxNDY2MjgsImV4cCI6MTYyMjIzMzAyOCwiYWNzU2NvcGUiOiJ2b2lwIiwicmVzb3VyY2VJZCI6IjcxZWM1OTBiLWNiYWQtNDkwYy05OWM1LWI1NzhiZGFjZGU1NCJ9.rheD0_KwV5AMd8S-YLU-EHwntj-Dt7uqzfIHetl5mTI7x9cPGKiqThHUF9YJGANZ1H6JSoI7yEnSL1IZb4VB4Qg0FBVV-M5s_E0f48za-cR_ZW0LDnrCyUQW04knvWruGM_gLQTBHRzKo4kj1XgUJMN0JqMnlQFQqGW7G50CZYbJ8alMh5ltUO6tiOuWMVA-Q8Jj4jnRoZWMFo1alPdW-ULHYNeJDlcEEZw6c5nSUmfYHoe52cxesNpRuQm-KyV1hKEDfCLgeP-zqeS-MTa_pwnyW8jhCersWpYQR6wQsSAsqSG0D-2CCoe0Dod68o_qYm5YXTc_qcLP0JYWk_79eg"
     
-    private var meetingUIClient: MeetingUIClient?
+    private var teamsSdkController: TeamsEmbedSdkController?
+    private var acsSdkController: AcsSdkController?
     
-    let statusLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
+    public let statusLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
+    
+    let teamsSdkLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
+    let acsSdkLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
+    
+    let joinMeetingButton = Button(text: "Join Meeting")
+    let joinGroupCallButton = Button(text: "Join Group Call")
+    let endMeetingButton = Button(text: "Hang up and Stop Teams")
+    
+    let joinAcsCallButton = Button(text: "Call 8:echo123")
+    let endAcsCallButton = Button(text: "End Call")
+    let stopAcsCallButton = Button(text: "Stop ACS")
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let joinMeetingButton = Button(text: "Join Meeting")
+        statusLabel.textColor = .systemBlue
+        statusLabel.text = "SDK not initilized"
+        
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(statusLabel)
+        statusLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        statusLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).isActive = true
+        
+        teamsSdkLabel.textColor = .systemPurple
+        teamsSdkLabel.text = "----- Teams Embed SDK -----"
+        
+        teamsSdkLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(teamsSdkLabel)
+        teamsSdkLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        teamsSdkLabel.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 80).isActive = true
+        
         joinMeetingButton.addTarget(self, action: #selector(joinMeetingTapped), for: .touchUpInside)
         
         joinMeetingButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(joinMeetingButton)
         joinMeetingButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        joinMeetingButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-
-        statusLabel.textColor = .systemBlue
-        statusLabel.text = "No active call"
-        
-        statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(statusLabel)
-        statusLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        statusLabel.bottomAnchor.constraint(equalTo: joinMeetingButton.topAnchor, constant: -100).isActive = true
-        
-        let joinGroupCallButton = Button(text: "Join Group Call")
+        joinMeetingButton.topAnchor.constraint(equalTo: teamsSdkLabel.bottomAnchor, constant: 10).isActive = true
+                        
         joinGroupCallButton.addTarget(self, action: #selector(joinGroupCallTapped), for: .touchUpInside)
         
         joinGroupCallButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(joinGroupCallButton)
         joinGroupCallButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        joinGroupCallButton.topAnchor.constraint(equalTo: joinMeetingButton.bottomAnchor, constant: 50).isActive = true
-        
-        let endMeetingButton = Button(text: "End Meeting")
+        joinGroupCallButton.topAnchor.constraint(equalTo: joinMeetingButton.bottomAnchor, constant: 20).isActive = true
+
         endMeetingButton.addTarget(self, action: #selector(endMeetingTapped), for: .touchUpInside)
         
         endMeetingButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(endMeetingButton)
         endMeetingButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        endMeetingButton.topAnchor.constraint(equalTo: joinGroupCallButton.bottomAnchor, constant: 50).isActive = true
+        endMeetingButton.topAnchor.constraint(equalTo: joinGroupCallButton.bottomAnchor, constant: 20).isActive = true
         
-        do {
-            let communicationTokenRefreshOptions = CommunicationTokenRefreshOptions(initialToken: acsToken, refreshProactively: true, tokenRefresher: fetchTokenAsync(completionHandler:))
-            let credential = try CommunicationTokenCredential(withOptions: communicationTokenRefreshOptions)
-            meetingUIClient = MeetingUIClient(with: credential)
-            meetingUIClient?.meetingUIClientDelegate = self
-            meetingUIClient?.set(iconConfig: self.getIconConfig())
-        }
-        catch {
-            print("Failed to create communication token credential")
-        }
-    }
-
-    func getIconConfig() -> Dictionary<MeetingUIClientIconType, String> {
-        var iconConfig = Dictionary<MeetingUIClientIconType, String>()
-        iconConfig.updateValue("mic_off", forKey: MeetingUIClientIconType.MicOff)
-        return iconConfig
+        acsSdkLabel.textColor = .systemGreen
+        acsSdkLabel.text = "----- ACS Calling SDK -----"
+        
+        acsSdkLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(acsSdkLabel)
+        acsSdkLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        acsSdkLabel.topAnchor.constraint(equalTo: endMeetingButton.bottomAnchor, constant: 50).isActive = true
+        
+        joinAcsCallButton.addTarget(self, action: #selector(joinAcsCallTapped), for: .touchUpInside)
+        
+        joinAcsCallButton.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(joinAcsCallButton)
+        joinAcsCallButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        joinAcsCallButton.topAnchor.constraint(equalTo: acsSdkLabel.bottomAnchor, constant: 20).isActive = true
+               
+        endAcsCallButton.addTarget(self, action: #selector(endAcsCallTapped), for: .touchUpInside)
+        
+        endAcsCallButton.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(endAcsCallButton)
+        endAcsCallButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        endAcsCallButton.topAnchor.constraint(equalTo: joinAcsCallButton.bottomAnchor, constant: 20).isActive = true
+        
+        stopAcsCallButton.addTarget(self, action: #selector(stopAcsCallTapped), for: .touchUpInside)
+        
+        stopAcsCallButton.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(stopAcsCallButton)
+        stopAcsCallButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        stopAcsCallButton.topAnchor.constraint(equalTo: endAcsCallButton.bottomAnchor, constant: 20).isActive = true
+        
+        self.teamsSdkController = TeamsEmbedSdkController(with: self.acsToken, viewController: self)
+        self.acsSdkController = AcsSdkController(with: self.acsToken, viewController: self)
+        
     }
     
     @IBAction func joinMeetingTapped(_ sender: UIButton) {
-        joinMeeting()
+        self.teamsSdkController?.joinMeeting()
     }
     
     @IBAction func joinGroupCallTapped(_ sender: UIButton) {
-        joinGroupCall()
+        self.teamsSdkController?.joinGroupCall()
     }
     
     @IBAction func endMeetingTapped(_ sender: UIButton) {
-        endMeeting()
+        self.teamsSdkController?.endMeeting()
     }
     
-    private func fetchTokenAsync(completionHandler: @escaping TokenRefreshHandler) {
-        func getTokenFromServer(completionHandler: @escaping (String) -> Void) {
-            completionHandler(self.acsToken)
-        }
-        getTokenFromServer { newToken in
-            completionHandler(newToken, nil)
-        }
+    @IBAction func joinAcsCallTapped(_ sender: UIButton) {
+        self.acsSdkController?.joinAcsCall()
     }
     
-    private func joinMeeting() {
-        meetingUIClient?.meetingUIClientIdentityProviderDelegate = self
-        meetingUIClient?.meetingUIClientUserEventDelegate = self
-        let meetingJoinOptions = MeetingUIClientMeetingJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true)
-        let meetingLocator = MeetingUIClientTeamsMeetingLinkLocator(meetingLink: self.meetingURL)
-        meetingUIClient?.join(meetingLocator: meetingLocator, joinCallOptions: meetingJoinOptions, completionHandler: { (error: Error?) in
-            if (error != nil) {
-                print("Join meeting failed: \(error!)")
-            }
-            else {
-                self.statusLabel.text = "Started to join ..."
-            }
-        })
+    @IBAction func endAcsCallTapped(_ sender: UIButton) {
+        self.acsSdkController?.endAcsCall()
     }
     
-    private func joinGroupCall() {
-        meetingUIClient?.meetingUIClientIdentityProviderDelegate = self
-        meetingUIClient?.meetingUIClientUserEventDelegate = self
-        let groupJoinOptions = MeetingUIClientGroupCallJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true, shouldEnablePreJoinView: true)
-        guard self.groupCallId != nil else {
-            print("Not valid group ID")
-            return
-        }
-        let groupLocator = MeetingUIClientGroupCallLocator(groupId: self.groupCallId!)
-        meetingUIClient?.join(meetingLocator: groupLocator, joinCallOptions: groupJoinOptions, completionHandler: { (error: Error?) in
-            if (error != nil) {
-                print("Join meeting failed: \(error!)")
-            }
-            else {
-                self.statusLabel.text = "Started to join ..."
-            }
-        })
+    @IBAction func stopAcsCallTapped(_ sender: UIButton) {
+        self.acsSdkController?.stopAcs()
+    }
+       
+    public func enableAcsButtons() {
+        joinAcsCallButton.enable()
+        endAcsCallButton.enable()
+        stopAcsCallButton.enable()
     }
     
-    private func endMeeting() {
-        meetingUIClient?.endMeeting(completionHandler: { (error: Error?) in
-            if (error != nil) {
-                print("End meeting failed: \(error!)")
-            }
-            else {
-                self.statusLabel.text = "Ending call ..."
-            }
-        })
+    public func disableAcsButtons() {
+        joinAcsCallButton.disable()
+        endAcsCallButton.disable()
+        stopAcsCallButton.disable()
     }
     
-    func meetingUIClient(didUpdateCallState callState: MeetingUIClientCallState) {
-        switch callState {
-        case .connecting:
-            self.statusLabel.text = "Connecting"
-            print("Call state has changed to 'Connecting'")
-        case .connected:
-            self.statusLabel .text = "Connected"
-            print("Call state has changed to 'Connected'")
-        case .waitingInLobby:
-            self.statusLabel .text = "In Lobby"
-            print("Call state has changed to 'Waiting in Lobby'")
-        case .ended:
-            self.statusLabel .text = "No active call"
-            print("Call state has changed to 'Ended'")
-        @unknown default:
-            print("Unsupported state")
-        }
+    public func enableTeamsSdkButtons() {
+        joinMeetingButton.enable()
+        joinGroupCallButton.enable()
+        endMeetingButton.enable()
     }
     
-    func meetingUIClient(didUpdateRemoteParticipantCount remoteParticpantCount: UInt) {
-        print("Remote participant count has changed to: \(remoteParticpantCount)")
+    public func disableTeamsSdkButtons() {
+        joinMeetingButton.disable()
+        joinGroupCallButton.disable()
+        endMeetingButton.disable()
     }
-    
-    func avatarFor(userIdentifier: String, completionHandler: @escaping (UIImage?) -> Void) {
-        if (userIdentifier.starts(with: "8:teamsvisitor:")) {
-            // Anonymous teams user will start with prefix 8:teamsvistor:
-            let image = UIImage (named: "avatarPink")
-            completionHandler(image!)
-        }
-        else if (userIdentifier.starts(with: "8:orgid:")) {
-            // OrgID user will start with prefix 8:orgid:
-            let image = UIImage (named: "avatarDoctor")
-            completionHandler(image!)
-        }
-        else if (userIdentifier.starts(with: "8:acs:")) {
-            // ACS user will start with prefix 8:acs:
-            let image = UIImage (named: "avatarGreen")
-            completionHandler(image!)
-        }
-        else {
-            completionHandler(nil)
-        }
-    }
-    
-    func displayNameFor(userIdentifier: String, completionHandler: @escaping (String?) -> Void) {
-        if (userIdentifier.starts(with: "8:acs:")) {
-            let displayName = "Acs User"
-            completionHandler(displayName)
-        }
-        else {
-            completionHandler(nil)
-        }
-    }
-    
-    func subTitleFor(userIdentifier: String, completionHandler: @escaping (String?) -> Void) {
-        if (userIdentifier.starts(with: "8:acs:")) {
-            let displayName = "ACS Subtitle Example"
-            completionHandler(displayName)
-        }
-        else {
-            completionHandler(nil)
-        }
-    }
- 
-    func onNamePlateOptionsClicked(userIdentifier: String) {
-        print("Name plate options clicked")
-    }
-    
 }

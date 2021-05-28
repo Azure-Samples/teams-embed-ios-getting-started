@@ -17,8 +17,8 @@
 		F81BC91D25F82FD600150A78 /* MeetingUIClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91825F82FD400150A78 /* MeetingUIClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F81BC91F25F82FD700150A78 /* TeamsAppSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */; };
 		F81BC92025F82FD700150A78 /* TeamsAppSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F8E5ADFE26263E0800879512 /* MsaiSdkCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E5ADFC26263E0500879512 /* MsaiSdkCore.framework */; };
-		F8E5ADFF26263E0800879512 /* MsaiSdkCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F8E5ADFC26263E0500879512 /* MsaiSdkCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F890C1EB266077DB00E07049 /* TeamsEmbedSdkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F890C1EA266077DA00E07049 /* TeamsEmbedSdkController.swift */; };
+		F890C1ED26607F3E00E07049 /* AcsSdkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F890C1EC26607F3E00E07049 /* AcsSdkController.swift */; };
 		F8E5B4432627C81F00879512 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E5B4422627C81F00879512 /* Button.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +30,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				F81BC92025F82FD700150A78 /* TeamsAppSDK.framework in Embed Frameworks */,
-				F8E5ADFF26263E0800879512 /* MsaiSdkCore.framework in Embed Frameworks */,
 				F81BC91D25F82FD600150A78 /* MeetingUIClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -51,7 +50,8 @@
 		B19FC305E7AA4E84917EB531 /* Pods-TeamsEmbediOSGettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamsEmbediOSGettingStarted.release.xcconfig"; path = "Target Support Files/Pods-TeamsEmbediOSGettingStarted/Pods-TeamsEmbediOSGettingStarted.release.xcconfig"; sourceTree = "<group>"; };
 		F81BC91825F82FD400150A78 /* MeetingUIClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MeetingUIClient.framework; path = Frameworks/MeetingUIClient.framework; sourceTree = "<group>"; };
 		F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TeamsAppSDK.framework; path = Frameworks/TeamsAppSDK.framework; sourceTree = "<group>"; };
-		F8E5ADFC26263E0500879512 /* MsaiSdkCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MsaiSdkCore.framework; path = Frameworks/MsaiSdkCore.framework; sourceTree = "<group>"; };
+		F890C1EA266077DA00E07049 /* TeamsEmbedSdkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsEmbedSdkController.swift; sourceTree = "<group>"; };
+		F890C1EC26607F3E00E07049 /* AcsSdkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcsSdkController.swift; sourceTree = "<group>"; };
 		F8E5B4422627C81F00879512 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,7 +62,6 @@
 			files = (
 				F81BC91C25F82FD600150A78 /* MeetingUIClient.framework in Frameworks */,
 				F81BC91F25F82FD700150A78 /* TeamsAppSDK.framework in Frameworks */,
-				F8E5ADFE26263E0800879512 /* MsaiSdkCore.framework in Frameworks */,
 				D97BAA0544D9661FA0516AF8 /* Pods_TeamsEmbediOSGettingStarted.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +101,8 @@
 			children = (
 				A81CC744258804D6001FAB57 /* AppDelegate.swift */,
 				A81CC748258804D6001FAB57 /* ViewController.swift */,
+				F890C1EC26607F3E00E07049 /* AcsSdkController.swift */,
+				F890C1EA266077DA00E07049 /* TeamsEmbedSdkController.swift */,
 				F8E5B4422627C81F00879512 /* Button.swift */,
 				A81CC74A258804D6001FAB57 /* Main.storyboard */,
 				A81CC74D258804D8001FAB57 /* Assets.xcassets */,
@@ -114,7 +115,6 @@
 		A81CC75925880EC7001FAB57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F8E5ADFC26263E0500879512 /* MsaiSdkCore.framework */,
 				F81BC91825F82FD400150A78 /* MeetingUIClient.framework */,
 				F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */,
 				37718113AA8B764119CFCC1B /* Pods_TeamsEmbediOSGettingStarted.framework */,
@@ -257,9 +257,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F890C1ED26607F3E00E07049 /* AcsSdkController.swift in Sources */,
 				A81CC749258804D6001FAB57 /* ViewController.swift in Sources */,
 				F8E5B4432627C81F00879512 /* Button.swift in Sources */,
 				A81CC745258804D6001FAB57 /* AppDelegate.swift in Sources */,
+				F890C1EB266077DB00E07049 /* TeamsEmbedSdkController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,7 +411,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = UBF8T346G9;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -439,7 +441,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = UBF8T346G9;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
