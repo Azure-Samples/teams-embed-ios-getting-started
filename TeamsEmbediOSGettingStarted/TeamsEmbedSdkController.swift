@@ -17,9 +17,9 @@ class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUI
     private var acsToken: String?
     private var viewController: ViewController
     
-    private let meetingURL = ""
+    private let meetingURL = "<MEETING_URL>"
 
-    private let groupCallId = UUID.init(uuidString: "")
+    private let groupCallId = UUID.init(uuidString: "<GROUP_ID>")
     
     public init(with token: String, viewController: ViewController) {
         self.acsToken = token

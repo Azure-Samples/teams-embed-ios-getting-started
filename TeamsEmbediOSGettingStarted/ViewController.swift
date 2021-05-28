@@ -8,7 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    private let acsToken = ""
+    private let acsToken = "<ACS_TOKEN>"
     
     private var teamsSdkController: TeamsEmbedSdkController?
     private var acsSdkController: AcsSdkController?
