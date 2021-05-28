@@ -6,12 +6,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, TeamsEmbedSdkManagerDelegate, AcsSdkManagerDelegate {
 
     private let acsToken = "<ACS_TOKEN>"
     
-    private var teamsSdkController: TeamsEmbedSdkController?
-    private var acsSdkController: AcsSdkController?
+    private var teamsSdkManager: TeamsEmbedSdkManager?
+    private var acsSdkManager: AcsSdkManager?
     
     public let statusLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
     
@@ -96,33 +96,35 @@ class ViewController: UIViewController {
         stopAcsCallButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stopAcsCallButton.topAnchor.constraint(equalTo: endAcsCallButton.bottomAnchor, constant: 20).isActive = true
         
-        self.teamsSdkController = TeamsEmbedSdkController(with: self.acsToken, viewController: self)
-        self.acsSdkController = AcsSdkController(with: self.acsToken, viewController: self)
+        self.teamsSdkManager = TeamsEmbedSdkManager(with: self.acsToken)
+        self.teamsSdkManager?.teamsEmbedSdkControllerDelegate = self
+        self.acsSdkManager = AcsSdkManager(with: self.acsToken)
+        self.acsSdkManager?.acsSdkManagerDelegate = self
         
     }
     
     @IBAction func joinMeetingTapped(_ sender: UIButton) {
-        self.teamsSdkController?.joinMeeting()
+        self.teamsSdkManager?.joinMeeting()
     }
     
     @IBAction func joinGroupCallTapped(_ sender: UIButton) {
-        self.teamsSdkController?.joinGroupCall()
+        self.teamsSdkManager?.joinGroupCall()
     }
     
     @IBAction func endMeetingTapped(_ sender: UIButton) {
-        self.teamsSdkController?.endMeeting()
+        self.teamsSdkManager?.endMeeting()
     }
     
     @IBAction func joinAcsCallTapped(_ sender: UIButton) {
-        self.acsSdkController?.joinAcsCall()
+        self.acsSdkManager?.joinAcsCall()
     }
     
     @IBAction func endAcsCallTapped(_ sender: UIButton) {
-        self.acsSdkController?.endAcsCall()
+        self.acsSdkManager?.endAcsCall()
     }
     
     @IBAction func stopAcsCallTapped(_ sender: UIButton) {
-        self.acsSdkController?.stopAcs()
+        self.acsSdkManager?.stopAcs()
     }
        
     public func enableAcsButtons() {
@@ -147,5 +149,29 @@ class ViewController: UIViewController {
         joinMeetingButton.disable()
         joinGroupCallButton.disable()
         endMeetingButton.disable()
+    }
+    
+    func onTeamsSdkStatusUpdated(status: String) {
+        self.statusLabel.text = status
+    }
+    
+    func onTeamsSdkInitialized() {
+        self.disableAcsButtons()
+    }
+    
+    func onTeamsSdkDisposed() {
+        self.enableAcsButtons()
+    }
+    
+    func onAcsSdkStatusUpdated(status: String) {
+        self.statusLabel.text = status
+    }
+    
+    func onAcsSdkInitialized() {
+        self.disableTeamsSdkButtons()
+    }
+    
+    func onAcsSdkDisposed() {
+        self.enableTeamsSdkButtons()
     }
 }

@@ -9,17 +9,17 @@ import Foundation
 import AzureCommunicationCommon
 import MeetingUIClient
 
-public protocol TeamsEmbedSdkControllerDelegate {
+public protocol TeamsEmbedSdkManagerDelegate {
     func onTeamsSdkStatusUpdated(status: String)
     func onTeamsSdkInitialized()
-    func onTeamSdkDisposed()
+    func onTeamsSdkDisposed()
 }
 
 class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUIClientCallIdentityProviderDelegate, MeetingUIClientCallUserEventDelegate {
     
-    private var internalTeamsEmbedSdkControllerDelegate: TeamsEmbedSdkControllerDelegate?
+    private var internalTeamsEmbedSdkControllerDelegate: TeamsEmbedSdkManagerDelegate?
     
-    public var teamsEmbedSdkControllerDelegate: TeamsEmbedSdkControllerDelegate? {
+    public var teamsEmbedSdkControllerDelegate: TeamsEmbedSdkManagerDelegate? {
         didSet {
             self.internalTeamsEmbedSdkControllerDelegate = teamsEmbedSdkControllerDelegate
         }
@@ -29,6 +29,7 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
     private var meetingUIClientCall: MeetingUIClientCall?
     private var shouldDispose: Bool = false
     private var acsToken: String?
+        
     private let meetingURL = "<MEETING_URL>"
 
     private let groupCallId = UUID.init(uuidString: "<GROUP_ID>")
@@ -76,6 +77,7 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
             if (error != nil) {
                 DispatchQueue.main.async {
                     self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: error!.localizedDescription)
+                    self.teardownTeamsSdk()
                 }
                 print("Join meeting failed: \(error!)")
             }
@@ -119,7 +121,7 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
                 self.meetingUIClientCall = nil
                 self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Teams SDK stopped")
                 
-                self.internalTeamsEmbedSdkControllerDelegate?.onTeamSdkDisposed()
+                self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkDisposed()
             }
         })
         
@@ -154,7 +156,7 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
             }
             catch {
                 print("Failed to create communication token credential")
-                self.internalTeamsEmbedSdkControllerDelegate?.onTeamSdkDisposed()
+                self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkDisposed()
             }
         }
     }

@@ -17,8 +17,8 @@
 		F81BC91D25F82FD600150A78 /* MeetingUIClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91825F82FD400150A78 /* MeetingUIClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F81BC91F25F82FD700150A78 /* TeamsAppSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */; };
 		F81BC92025F82FD700150A78 /* TeamsAppSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F890C1EB266077DB00E07049 /* TeamsEmbedSdkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F890C1EA266077DA00E07049 /* TeamsEmbedSdkController.swift */; };
-		F890C1ED26607F3E00E07049 /* AcsSdkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F890C1EC26607F3E00E07049 /* AcsSdkController.swift */; };
+		F890C1EB266077DB00E07049 /* TeamsEmbedSdkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F890C1EA266077DA00E07049 /* TeamsEmbedSdkManager.swift */; };
+		F890C1ED26607F3E00E07049 /* AcsSdkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F890C1EC26607F3E00E07049 /* AcsSdkManager.swift */; };
 		F8E5B4432627C81F00879512 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E5B4422627C81F00879512 /* Button.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,8 +50,8 @@
 		B19FC305E7AA4E84917EB531 /* Pods-TeamsEmbediOSGettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamsEmbediOSGettingStarted.release.xcconfig"; path = "Target Support Files/Pods-TeamsEmbediOSGettingStarted/Pods-TeamsEmbediOSGettingStarted.release.xcconfig"; sourceTree = "<group>"; };
 		F81BC91825F82FD400150A78 /* MeetingUIClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MeetingUIClient.framework; path = Frameworks/MeetingUIClient.framework; sourceTree = "<group>"; };
 		F81BC91925F82FD400150A78 /* TeamsAppSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TeamsAppSDK.framework; path = Frameworks/TeamsAppSDK.framework; sourceTree = "<group>"; };
-		F890C1EA266077DA00E07049 /* TeamsEmbedSdkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsEmbedSdkController.swift; sourceTree = "<group>"; };
-		F890C1EC26607F3E00E07049 /* AcsSdkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcsSdkController.swift; sourceTree = "<group>"; };
+		F890C1EA266077DA00E07049 /* TeamsEmbedSdkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsEmbedSdkManager.swift; sourceTree = "<group>"; };
+		F890C1EC26607F3E00E07049 /* AcsSdkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcsSdkManager.swift; sourceTree = "<group>"; };
 		F8E5B4422627C81F00879512 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,8 +101,8 @@
 			children = (
 				A81CC744258804D6001FAB57 /* AppDelegate.swift */,
 				A81CC748258804D6001FAB57 /* ViewController.swift */,
-				F890C1EC26607F3E00E07049 /* AcsSdkController.swift */,
-				F890C1EA266077DA00E07049 /* TeamsEmbedSdkController.swift */,
+				F890C1EC26607F3E00E07049 /* AcsSdkManager.swift */,
+				F890C1EA266077DA00E07049 /* TeamsEmbedSdkManager.swift */,
 				F8E5B4422627C81F00879512 /* Button.swift */,
 				A81CC74A258804D6001FAB57 /* Main.storyboard */,
 				A81CC74D258804D8001FAB57 /* Assets.xcassets */,
@@ -257,11 +257,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F890C1ED26607F3E00E07049 /* AcsSdkController.swift in Sources */,
+				F890C1ED26607F3E00E07049 /* AcsSdkManager.swift in Sources */,
 				A81CC749258804D6001FAB57 /* ViewController.swift in Sources */,
 				F8E5B4432627C81F00879512 /* Button.swift in Sources */,
 				A81CC745258804D6001FAB57 /* AppDelegate.swift in Sources */,
-				F890C1EB266077DB00E07049 /* TeamsEmbedSdkController.swift in Sources */,
+				F890C1EB266077DB00E07049 /* TeamsEmbedSdkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
