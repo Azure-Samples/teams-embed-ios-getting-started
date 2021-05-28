@@ -1,29 +1,40 @@
+//----------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 //
-//  ViewControllerViewModel.swift
-//  TeamsEmbediOSGettingStarted
-//
-//  Created by Raimond Sinivee on 5/27/21.
-//
+// Name: TeamsEmbedSdkManager.swift
+//----------------------------------------------------------------
 
 import Foundation
 import AzureCommunicationCommon
 import MeetingUIClient
 
-class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUIClientCallIdentityProviderDelegate, MeetingUIClientCallUserEventDelegate {
+public protocol TeamsEmbedSdkManagerDelegate {
+    func onTeamsSdkStatusUpdated(status: String)
+    func onTeamsSdkInitialized()
+    func onTeamsSdkDisposed()
+}
+
+class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUIClientCallIdentityProviderDelegate, MeetingUIClientCallUserEventDelegate {
+    
+    private var internalTeamsEmbedSdkControllerDelegate: TeamsEmbedSdkManagerDelegate?
+    
+    public var teamsEmbedSdkControllerDelegate: TeamsEmbedSdkManagerDelegate? {
+        didSet {
+            self.internalTeamsEmbedSdkControllerDelegate = teamsEmbedSdkControllerDelegate
+        }
+    }
     
     private var meetingUIClient: MeetingUIClient?
     private var meetingUIClientCall: MeetingUIClientCall?
     private var shouldDispose: Bool = false
     private var acsToken: String?
-    private var viewController: TeamsViewController
-    
+        
     private let meetingURL = "<MEETING_URL>"
 
     private let groupCallId = UUID.init(uuidString: "<GROUP_ID>")
     
-    public init(with token: String, viewController: TeamsViewController) {
+    public init(with token: String) {
         self.acsToken = token
-        self.viewController = viewController
     }
     
     public func joinMeeting() {
@@ -34,7 +45,7 @@ class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUI
         let meetingLocator = MeetingUIClientTeamsMeetingLinkLocator(meetingLink: self.meetingURL)
         meetingUIClient?.join(meetingLocator: meetingLocator, joinCallOptions: meetingJoinOptions, completionHandler: { (meetingUIClientCall: MeetingUIClientCall?, error: Error?) in
             if (error != nil) {
-                self.viewController.statusLabel.text = error?.localizedDescription
+                self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: error!.localizedDescription)
                 print("Join meeting failed: \(error!)")
             }
             else {
@@ -43,9 +54,9 @@ class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUI
                     self.meetingUIClientCall?.meetingUIClientCallDelegate = self
                     self.meetingUIClientCall?.meetingUIClientCallIdentityProviderDelegate = self
                     self.meetingUIClientCall?.meetingUIClientCallUserEventDelegate = self
-                    self.viewController.statusLabel.text = "Started to join ..."
+                    self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Started to join ...")
                 } else {
-                    self.viewController.statusLabel.text = "Call didn't initialize"
+                    self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Call didn't initialize")
                 }
             }
         })
@@ -64,7 +75,8 @@ class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUI
         meetingUIClient?.join(meetingLocator: groupLocator, joinCallOptions: groupJoinOptions, completionHandler: { (meetingUIClientCall: MeetingUIClientCall?, error: Error?) in
             if (error != nil) {
                 DispatchQueue.main.async {
-                    self.viewController.statusLabel.text = error?.localizedDescription
+                    self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: error!.localizedDescription)
+                    self.teardownTeamsSdk()
                 }
                 print("Join meeting failed: \(error!)")
             }
@@ -74,9 +86,9 @@ class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUI
                     self.meetingUIClientCall?.meetingUIClientCallDelegate = self
                     self.meetingUIClientCall?.meetingUIClientCallIdentityProviderDelegate = self
                     self.meetingUIClientCall?.meetingUIClientCallUserEventDelegate = self
-                    self.viewController.statusLabel.text = "Started to join ..."
+                    self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Started to join ...")
                 } else {
-                    self.viewController.statusLabel.text = "Call didn't initialize"
+                    self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Call didn't initialize")
                 }
             }
         })
@@ -86,11 +98,11 @@ class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUI
         meetingUIClientCall?.hangUp(completionHandler: { (error: Error?) in
             if (error != nil) {
                 print("End meeting failed: \(error!)")
-                self.viewController.statusLabel.text = error?.localizedDescription
+                self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: error!.localizedDescription)
                 self.teardownTeamsSdk()
             }
             else {
-                self.viewController.statusLabel.text = "Call ending ..."
+                self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Call ending ...")
                 self.shouldDispose = true;
             }
         })
@@ -98,15 +110,17 @@ class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUI
         
     private func teardownTeamsSdk() {
         self.shouldDispose = false
-        self.viewController.statusLabel.text = "Teams SDK stopping ..."
+        self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Teams SDK stopping ...")
         self.meetingUIClient?.dispose(completionHandler: { (error: Error?) in
             if (error != nil) {
                 print("Dispose failed: \(error!)")
-                self.viewController.statusLabel.text = error?.localizedDescription
+                self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: error!.localizedDescription)
             } else {
                 self.meetingUIClient = nil
                 self.meetingUIClientCall = nil
-                self.viewController.statusLabel.text = "Teams SDK stopped"
+                self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Teams SDK stopped")
+                
+                self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkDisposed()
             }
         })
         
@@ -131,15 +145,17 @@ class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUI
         if (meetingUIClient == nil)
         {
             do {
+                self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkInitialized()
                 let communicationTokenRefreshOptions = CommunicationTokenRefreshOptions(initialToken: acsToken, refreshProactively: true, tokenRefresher: fetchTokenAsync(completionHandler:))
                 let credential = try CommunicationTokenCredential(withOptions: communicationTokenRefreshOptions)
-                self.viewController.statusLabel.text = "Teams SDK initilizing ..."
+                self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Teams SDK initilizing ...")
                 meetingUIClient = MeetingUIClient(with: credential)
                 meetingUIClient?.set(iconConfig: self.getIconConfig())
-                self.viewController.statusLabel.text = "Teams SDK initialized"
+                self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Teams SDK initialized")
             }
             catch {
                 print("Failed to create communication token credential")
+                self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkDisposed()
             }
         }
     }
@@ -150,16 +166,16 @@ class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUI
     func meetingUIClientCall(didUpdateCallState callState: MeetingUIClientCallState) {
         switch callState {
         case .connecting:
-            self.viewController.statusLabel.text = "Connecting"
+            self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Connecting")
             print("Call state has changed to 'Connecting'")
         case .connected:
-            self.viewController.statusLabel .text = "Connected"
+            self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Connected")
             print("Call state has changed to 'Connected'")
         case .waitingInLobby:
-            self.viewController.statusLabel .text = "In Lobby"
+            self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "In Lobby")
             print("Call state has changed to 'Waiting in Lobby'")
         case .ended:
-            self.viewController.statusLabel .text = "No active call"
+            self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "No active call")
             print("Call state has changed to 'Ended'")
             if (shouldDispose) {
                 self.teardownTeamsSdk()

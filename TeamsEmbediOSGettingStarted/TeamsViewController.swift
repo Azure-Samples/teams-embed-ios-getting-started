@@ -8,10 +8,10 @@ import Foundation
 
 import UIKit
 
-class TeamsViewController: UIViewController {
+class TeamsViewController: UIViewController, TeamsEmbedSdkManagerDelegate {
     
     private let acsToken = "<ACS_TOKEN>"
-    private var teamsSdkController: TeamsEmbedSdkController?
+    private var teamsSdkManager: TeamsEmbedSdkManager?
     public let statusLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
     let teamsSdkLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
     let joinMeetingButton = Button(text: "Join Meeting")
@@ -20,6 +20,8 @@ class TeamsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let isAcsInit = UserDefaults.standard.bool(forKey: "acsInitialized")
+        isAcsInit ? disableTeamsSdkButtons() : enableTeamsSdkButtons()
     }
     
     override func viewDidLoad() {
@@ -61,19 +63,20 @@ class TeamsViewController: UIViewController {
         endMeetingButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         endMeetingButton.topAnchor.constraint(equalTo: joinGroupCallButton.bottomAnchor, constant: 20).isActive = true
         
-        self.teamsSdkController = TeamsEmbedSdkController(with: self.acsToken, viewController: self)
+        self.teamsSdkManager = TeamsEmbedSdkManager(with: self.acsToken)
+        self.teamsSdkManager?.teamsEmbedSdkControllerDelegate = self
     }
     
-    @objc func joinMeetingTapped() {
-        self.teamsSdkController?.joinMeeting()
+    @IBAction func joinMeetingTapped(_ sender: UIButton) {
+        self.teamsSdkManager?.joinMeeting()
     }
     
-    @objc func joinGroupCallTapped() {
-        self.teamsSdkController?.joinGroupCall()
+    @IBAction func joinGroupCallTapped(_ sender: UIButton) {
+        self.teamsSdkManager?.joinGroupCall()
     }
     
-    @objc func endMeetingTapped() {
-        self.teamsSdkController?.endMeeting()
+    @IBAction func endMeetingTapped(_ sender: UIButton) {
+        self.teamsSdkManager?.endMeeting()
     }
     
     public func enableTeamsSdkButtons() {
@@ -86,5 +89,17 @@ class TeamsViewController: UIViewController {
         joinMeetingButton.disable()
         joinGroupCallButton.disable()
         endMeetingButton.disable()
+    }
+    
+    func onTeamsSdkStatusUpdated(status: String) {
+        self.statusLabel.text = status
+    }
+    
+    func onTeamsSdkInitialized() {
+        UserDefaults.standard.setValue(true, forKey: "teamsInitialized");
+    }
+    
+    func onTeamsSdkDisposed() {
+        UserDefaults.standard.setValue(false, forKey: "teamsInitialized");
     }
 }

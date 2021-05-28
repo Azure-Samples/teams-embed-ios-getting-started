@@ -6,10 +6,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    
+class ViewController: UIViewController, AcsSdkManagerDelegate {
+
     private let acsToken = "<ACS_TOKEN>"
-    private var acsSdkController: AcsSdkController?
+    private var acsSdkManager: AcsSdkManager?
     public let statusLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
     let acsSdkLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
     let joinAcsCallButton = Button(text: "Call 8:echo123")
@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let isAcsInit = UserDefaults.standard.bool(forKey: "teamsInitialized")
+        isAcsInit ? disableAcsButtons() : enableAcsButtons()
     }
     
     override func viewDidLoad() {
@@ -60,20 +62,21 @@ class ViewController: UIViewController {
         stopAcsCallButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stopAcsCallButton.topAnchor.constraint(equalTo: endAcsCallButton.bottomAnchor, constant: 20).isActive = true
         
+        self.acsSdkManager = AcsSdkManager(with: self.acsToken)
+        self.acsSdkManager?.acsSdkManagerDelegate = self
         
-        self.acsSdkController = AcsSdkController(with: self.acsToken, viewController: self)
     }
     
-    @objc func joinAcsCallTapped() {
-        self.acsSdkController?.joinAcsCall()
+    @IBAction func joinAcsCallTapped(_ sender: UIButton) {
+        self.acsSdkManager?.joinAcsCall()
     }
     
-    @objc func endAcsCallTapped() {
-        self.acsSdkController?.endAcsCall()
+    @IBAction func endAcsCallTapped(_ sender: UIButton) {
+        self.acsSdkManager?.endAcsCall()
     }
     
-    @objc func stopAcsCallTapped() {
-        self.acsSdkController?.stopAcs()
+    @IBAction func stopAcsCallTapped(_ sender: UIButton) {
+        self.acsSdkManager?.stopAcs()
     }
        
     public func enableAcsButtons() {
@@ -86,5 +89,17 @@ class ViewController: UIViewController {
         joinAcsCallButton.disable()
         endAcsCallButton.disable()
         stopAcsCallButton.disable()
+    }
+
+    func onAcsSdkStatusUpdated(status: String) {
+        self.statusLabel.text = status
+    }
+    
+    func onAcsSdkInitialized() {
+        UserDefaults.standard.setValue(true, forKey: "acsInitialized");
+    }
+    
+    func onAcsSdkDisposed() {
+        UserDefaults.standard.setValue(false, forKey: "acsInitialized");
     }
 }

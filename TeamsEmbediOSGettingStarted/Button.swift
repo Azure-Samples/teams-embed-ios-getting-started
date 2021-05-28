@@ -1,9 +1,8 @@
+//----------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 //
-//  Button.swift
-//  TeamsEmbediOSGettingStarted
-//
-//  Created by Raimond Sinivee on 4/14/21.
-//
+// Name: Button.swift
+//----------------------------------------------------------------
 
 import UIKit
 

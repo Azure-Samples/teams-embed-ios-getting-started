@@ -32,23 +32,40 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="HVd-I3-gfP" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jTC-kQ-4Ln">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="v0H-WF-ZDU" kind="relationship" relationship="viewControllers" id="9cb-Hb-8lm"/>
-                        <segue destination="Lqb-dc-AbI" kind="relationship" relationship="viewControllers" id="rqu-JP-43M"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="WVw-A7-4m3"/>
+                        <segue destination="gwi-TU-NDk" kind="relationship" relationship="viewControllers" id="Pd4-1S-aLd"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EBu-UM-GPT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1952.1739130434785" y="115.84821428571428"/>
+            <point key="canvasLocation" x="1286" y="116"/>
+        </scene>
+        <!--Teams-->
+        <scene sceneID="3a0-2K-bRe">
+            <objects>
+                <viewController id="gwi-TU-NDk" customClass="TeamsViewController" customModule="TeamsEmbediOSGettingStarted" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GuH-ng-GNP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="aSn-RV-EYe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Teams" id="7cZ-46-U48"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5i4-fK-u3C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2862" y="861"/>
         </scene>
         <!--SettingsViewController-->
         <scene sceneID="cLJ-ci-iSS">
             <objects>
-                <viewController id="v0H-WF-ZDU" userLabel="SettingsViewController" sceneMemberID="viewController">
+                <viewController id="v0H-WF-ZDU" userLabel="SettingsViewController" customClass="TeamsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kz5-GM-SGy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,22 +93,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0hh-Un-H6X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2842.0289855072465" y="-557.14285714285711"/>
-        </scene>
-        <!--TeamsViewController-->
-        <scene sceneID="cAZ-ea-8X7">
-            <objects>
-                <viewController id="Lqb-dc-AbI" userLabel="TeamsViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hco-Ov-az4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="8vE-pp-luU"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Teams" id="0gX-gl-I52"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hPZ-U7-rKC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3045" y="761"/>
         </scene>
     </scenes>
     <resources>
