@@ -15,13 +15,13 @@ class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUI
     private var meetingUIClientCall: MeetingUIClientCall?
     private var shouldDispose: Bool = false
     private var acsToken: String?
-    private var viewController: ViewController
+    private var viewController: TeamsViewController
     
     private let meetingURL = "<MEETING_URL>"
 
     private let groupCallId = UUID.init(uuidString: "<GROUP_ID>")
     
-    public init(with token: String, viewController: ViewController) {
+    public init(with token: String, viewController: TeamsViewController) {
         self.acsToken = token
         self.viewController = viewController
     }
@@ -107,8 +107,6 @@ class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUI
                 self.meetingUIClient = nil
                 self.meetingUIClientCall = nil
                 self.viewController.statusLabel.text = "Teams SDK stopped"
-                
-                self.viewController.enableAcsButtons()
             }
         })
         
@@ -133,7 +131,6 @@ class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUI
         if (meetingUIClient == nil)
         {
             do {
-                self.viewController.disableAcsButtons()
                 let communicationTokenRefreshOptions = CommunicationTokenRefreshOptions(initialToken: acsToken, refreshProactively: true, tokenRefresher: fetchTokenAsync(completionHandler:))
                 let credential = try CommunicationTokenCredential(withOptions: communicationTokenRefreshOptions)
                 self.viewController.statusLabel.text = "Teams SDK initilizing ..."
@@ -143,7 +140,6 @@ class TeamsEmbedSdkController : NSObject, MeetingUIClientCallDelegate, MeetingUI
             }
             catch {
                 print("Failed to create communication token credential")
-                self.viewController.enableAcsButtons()
             }
         }
     }

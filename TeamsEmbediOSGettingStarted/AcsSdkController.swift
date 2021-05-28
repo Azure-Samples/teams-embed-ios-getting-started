@@ -36,7 +36,6 @@ class AcsSdkController : NSObject {
                 return
             }
             
-            self.viewController.disableTeamsSdkButtons()
             self.callClient = CallClient()
             
             // Creates the call agent
@@ -44,7 +43,6 @@ class AcsSdkController : NSObject {
                 if error != nil {
                     print("ERROR: It was not possible to create a call agent.")
                     self.viewController.statusLabel.text = "It was not possible to create a call agent"
-                    self.viewController.enableTeamsSdkButtons()
                     return
                 } else {
                     self.callAgent = agent
@@ -85,7 +83,6 @@ class AcsSdkController : NSObject {
         self.callAgent = nil
         self.callClient = nil
         self.viewController.statusLabel.text = "Disposed ACS"
-        self.viewController.enableTeamsSdkButtons()
     }
     
     private func startAcsCall() {
