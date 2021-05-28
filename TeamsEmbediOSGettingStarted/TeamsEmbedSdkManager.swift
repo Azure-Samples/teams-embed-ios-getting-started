@@ -28,10 +28,6 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
     private var meetingUIClientCall: MeetingUIClientCall?
     private var shouldDispose: Bool = false
     private var acsToken: String?
-        
-    private let meetingURL = "<MEETING_URL>"
-
-    private let groupCallId = UUID.init(uuidString: "<GROUP_ID>")
     
     public init(with token: String) {
         self.acsToken = token
@@ -42,7 +38,8 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
         initTeamsSdk()
         
         let meetingJoinOptions = MeetingUIClientMeetingJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true)
-        let meetingLocator = MeetingUIClientTeamsMeetingLinkLocator(meetingLink: self.meetingURL)
+        let meetingURLString = UserDefaults.standard.string(forKey: "meetingURLKey") ?? "<MEETING_URL>"
+        let meetingLocator = MeetingUIClientTeamsMeetingLinkLocator(meetingLink: meetingURLString)
         meetingUIClient?.join(meetingLocator: meetingLocator, joinCallOptions: meetingJoinOptions, completionHandler: { (meetingUIClientCall: MeetingUIClientCall?, error: Error?) in
             if (error != nil) {
                 self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: error!.localizedDescription)
@@ -67,11 +64,9 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
         initTeamsSdk()
         
         let groupJoinOptions = MeetingUIClientGroupCallJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true)
-        guard self.groupCallId != nil else {
-            print("Not valid group ID")
-            return
-        }
-        let groupLocator = MeetingUIClientGroupCallLocator(groupId: self.groupCallId!)
+        let groupCallId = UserDefaults.standard.string(forKey: "groupIdKey") ?? "<GROUP_ID>"
+        let groupLocator = MeetingUIClientGroupCallLocator(groupId: UUID.init(uuidString: groupCallId)!)
+        
         meetingUIClient?.join(meetingLocator: groupLocator, joinCallOptions: groupJoinOptions, completionHandler: { (meetingUIClientCall: MeetingUIClientCall?, error: Error?) in
             if (error != nil) {
                 DispatchQueue.main.async {

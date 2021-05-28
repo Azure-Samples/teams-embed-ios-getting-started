@@ -37,9 +37,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="v0H-WF-ZDU" kind="relationship" relationship="viewControllers" id="9cb-Hb-8lm"/>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="WVw-A7-4m3"/>
                         <segue destination="gwi-TU-NDk" kind="relationship" relationship="viewControllers" id="Pd4-1S-aLd"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="WVw-A7-4m3"/>
+                        <segue destination="v0H-WF-ZDU" kind="relationship" relationship="viewControllers" id="9cb-Hb-8lm"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EBu-UM-GPT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -65,30 +65,71 @@
         <!--SettingsViewController-->
         <scene sceneID="cLJ-ci-iSS">
             <objects>
-                <viewController id="v0H-WF-ZDU" userLabel="SettingsViewController" customClass="TeamsViewController" sceneMemberID="viewController">
+                <viewController id="v0H-WF-ZDU" userLabel="SettingsViewController" customClass="SettingsViewController" customModule="TeamsEmbediOSGettingStarted" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kz5-GM-SGy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Test the settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHn-Mx-78J">
-                                <rect key="frame" x="84" y="231" width="127" height="47"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KXJ-WN-wKo">
-                                <rect key="frame" x="20" y="302" width="361" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KXJ-WN-wKo">
+                                <rect key="frame" x="20" y="64" width="374" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="4mq-g9-zPy"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8r5-tV-fSj">
+                                <rect key="frame" x="20" y="124" width="374" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Tnd-da-zDn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xUb-SC-SpN">
+                                <rect key="frame" x="20" y="184" width="374" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Gd2-KF-AM0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YiP-wg-1Vo">
+                                <rect key="frame" x="69.5" y="758" width="275" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="qXi-8N-MmY"/>
+                                    <constraint firstAttribute="width" constant="275" id="zqA-bi-WCi"/>
+                                </constraints>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonTapped:" destination="v0H-WF-ZDU" eventType="touchUpInside" id="xin-rj-irH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hYi-8z-gof"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hYi-8z-gof" firstAttribute="trailing" secondItem="xUb-SC-SpN" secondAttribute="trailing" constant="20" id="3vy-nN-bNF"/>
+                            <constraint firstItem="8r5-tV-fSj" firstAttribute="leading" secondItem="hYi-8z-gof" secondAttribute="leading" constant="20" id="Eb7-93-cqQ"/>
+                            <constraint firstItem="hYi-8z-gof" firstAttribute="trailing" secondItem="8r5-tV-fSj" secondAttribute="trailing" constant="20" id="Owk-Eg-rjn"/>
+                            <constraint firstItem="xUb-SC-SpN" firstAttribute="leading" secondItem="hYi-8z-gof" secondAttribute="leading" constant="20" id="SHd-fH-zn1"/>
+                            <constraint firstItem="KXJ-WN-wKo" firstAttribute="top" secondItem="hYi-8z-gof" secondAttribute="top" constant="20" id="V86-pA-iRS"/>
+                            <constraint firstItem="hYi-8z-gof" firstAttribute="trailing" secondItem="KXJ-WN-wKo" secondAttribute="trailing" constant="20" id="YKt-QV-oOw"/>
+                            <constraint firstItem="YiP-wg-1Vo" firstAttribute="centerX" secondItem="kz5-GM-SGy" secondAttribute="centerX" id="bKb-Wm-QTy"/>
+                            <constraint firstItem="8r5-tV-fSj" firstAttribute="top" secondItem="KXJ-WN-wKo" secondAttribute="bottom" constant="20" id="jq6-8Q-zxc"/>
+                            <constraint firstItem="hYi-8z-gof" firstAttribute="bottom" secondItem="YiP-wg-1Vo" secondAttribute="bottom" constant="15" id="kRb-Jd-C5w"/>
+                            <constraint firstItem="xUb-SC-SpN" firstAttribute="top" secondItem="8r5-tV-fSj" secondAttribute="bottom" constant="20" id="rSe-RU-754"/>
+                            <constraint firstItem="KXJ-WN-wKo" firstAttribute="leading" secondItem="hYi-8z-gof" secondAttribute="leading" constant="20" id="zmZ-01-5go"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" id="0Bo-3B-x4h"/>
                     <navigationItem key="navigationItem" id="vRh-rz-eer"/>
+                    <connections>
+                        <outlet property="acsTokenTextField" destination="xUb-SC-SpN" id="QUX-QY-ewp"/>
+                        <outlet property="groupIdTextField" destination="8r5-tV-fSj" id="unK-SI-ODZ"/>
+                        <outlet property="meetingURLTextField" destination="KXJ-WN-wKo" id="u8F-RA-Q5a"/>
+                        <outlet property="saveButton" destination="YiP-wg-1Vo" id="TTx-EY-yxp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0hh-Un-H6X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
