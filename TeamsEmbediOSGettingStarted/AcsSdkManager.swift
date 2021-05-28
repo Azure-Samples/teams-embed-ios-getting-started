@@ -1,9 +1,8 @@
+//----------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 //
-//  AcsSdkController.swift
-//  TeamsEmbediOSGettingStarted
-//
-//  Created by Raimond Sinivee on 5/27/21.
-//
+// Name: AcsSdkManager.swift
+//----------------------------------------------------------------
 
 import Foundation
 import AVFoundation

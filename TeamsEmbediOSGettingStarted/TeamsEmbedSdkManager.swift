@@ -1,9 +1,8 @@
+//----------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 //
-//  ViewControllerViewModel.swift
-//  TeamsEmbediOSGettingStarted
-//
-//  Created by Raimond Sinivee on 5/27/21.
-//
+// Name: TeamsEmbedSdkManager.swift
+//----------------------------------------------------------------
 
 import Foundation
 import AzureCommunicationCommon
