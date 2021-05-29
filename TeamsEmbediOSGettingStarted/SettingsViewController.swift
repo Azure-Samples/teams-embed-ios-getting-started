@@ -12,6 +12,16 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var groupIdTextField: UITextField!
     @IBOutlet weak var acsTokenTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var showStagingToggle: UISwitch!
+    @IBOutlet weak var customizeCallScreenToggle: UISwitch!
+    
+    @IBAction func showStagingToggled(_ sender: Any) {
+        UserDefaults.standard.setValue(showStagingToggle.isOn, forKey: "showStagingKey")
+    }
+    
+    @IBAction func customizeCallScreenToggled(_ sender: Any) {
+        UserDefaults.standard.setValue(showStagingToggle.isOn, forKey: "customizeCallScreenKey")
+    }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         var message: String = ""
@@ -64,6 +74,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTextFields()
+        showStagingToggle.setOn(UserDefaults.standard.bool(forKey: "showStagingKey"), animated: false)
+        customizeCallScreenToggle.setOn(UserDefaults.standard.bool(forKey: "customizeCallScreenKey"), animated: false)
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(handleTapGesture))
         view.addGestureRecognizer(tapGesture)
     }
