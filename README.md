@@ -42,13 +42,17 @@ The following classes and interfaces used in the quickstart handle some of the m
 4. Open TeamsEmbediOSGettingStarted.xcworkspace
 5. Copy the `TeamsAppSDK.framework`, the `MeetingUIClient.framework` and other frameworks provided in the release bundle to the `Frameworks` folder in the project root
 6. Select development team under Signing and Capabilities.
-7. With the `Access Token` procured in pre-requisites, in the **TeamsEmbediOSGettingStarted/ViewController.swift** file, replace `<USER_ACCESS_TOKEN>`.
-8. In the **TeamsEmbediOSGettingStarted/ViewController.swift** file, replace `<MEETING_URL>` with your a Microsoft Teams meeting url.
-9. In the **TeamsEmbediOSGettingStarted/ViewController.swift** file, replace `<GROUP_ID>` with your a goup id UUID.
+7. With the `Access Token` procured in pre-requisites, in the **TeamsEmbediOSGettingStarted/AcsSdkManager.swift**, **TeamsEmbediOSGettingStarted/TeamsEmbedSdkManager.swift**  files, replace `<USER_ACCESS_TOKEN>`.
+8. In the **TeamsEmbediOSGettingStarted/TeamsEmbedSdkManager.swift** file, replace `<MEETING_URL>` with your a Microsoft Teams meeting url.
+9. In the **TeamsEmbediOSGettingStarted/TeamsEmbedSdkManager.swift** file, replace `<GROUP_ID>` with your a goup id UUID.
 
 ## Run the sample
 
 You can build an run your app on iOS simulator by selecting **Product** > **Run** or by using the (&#8984;-R) keyboard shortcut.
+
+1. With the `Access Token` procured in pre-requisites, Go to Settings tab paste the token in the Access Token textfield and Click Save.
+2. Go to Settings tab paste the Microsoft Teams meeting url in the Teams Meeting URL textfield and Click Save.
+3. Go to Settings tab paste the Group Id UUID in the Group Id textfield and Click Save.
 
 ![Final look and feel of the quick start app](Media/quick-start-join-meeting.png)
 

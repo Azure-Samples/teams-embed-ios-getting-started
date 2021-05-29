@@ -1,9 +1,8 @@
+//----------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
 //
-//  Button.swift
-//  TeamsEmbediOSGettingStarted
-//
-//  Created by Raimond Sinivee on 4/14/21.
-//
+// Name: Button.swift
+//----------------------------------------------------------------
 
 import UIKit
 
@@ -21,5 +20,17 @@ class Button : UIButton {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func enable() {
+        self.isEnabled = true
+        self.setTitleColor(UIColor.white, for: .normal)
+        self.layer.borderColor = UIColor.white.cgColor
+    }
+    
+    public func disable() {
+        self.isEnabled = false
+        self.setTitleColor(UIColor.gray, for: .normal)
+        self.layer.borderColor = UIColor.gray.cgColor
     }
 }
