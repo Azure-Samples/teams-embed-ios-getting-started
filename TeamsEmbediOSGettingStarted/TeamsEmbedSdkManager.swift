@@ -71,7 +71,7 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
         initTeamsSdk()
         
         let showStagingScreen : Bool = UserDefaults.standard.bool(forKey: "showStagingKey")
-        let groupJoinOptions = MeetingUIClientGroupCallJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true, enableCallStagingScreen: showStagingScreen)
+        let groupJoinOptions = MeetingUIClientGroupCallJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true)//,enableCallStagingScreen: showStagingScreen)
         let groupCallId = UserDefaults.standard.string(forKey: "groupIdKey") ?? "<GROUP_ID>"
         let groupLocator = MeetingUIClientGroupCallLocator(groupId: UUID.init(uuidString: groupCallId)!)
         
@@ -79,6 +79,11 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
             meetingUIClient?.meetingUIClientInCallScreenDelegate = self
             meetingUIClient?.meetingUIClientStagingScreenDelegate = self
             meetingUIClient?.meetingUIClientConnectingScreenDelegate = self
+        }
+        else {
+            meetingUIClient?.meetingUIClientInCallScreenDelegate = nil
+            meetingUIClient?.meetingUIClientStagingScreenDelegate = nil
+            meetingUIClient?.meetingUIClientConnectingScreenDelegate = nil
         }
         
         meetingUIClient?.join(meetingLocator: groupLocator, joinCallOptions: groupJoinOptions, completionHandler: { (meetingUIClientCall: MeetingUIClientCall?, error: Error?) in
@@ -205,13 +210,13 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
     func onIsMutedChanged() {
         print("Mute state changed to: \(meetingUIClientCall?.isMuted ?? false)")
         isMicOn = !(meetingUIClientCall?.isMuted ?? false)
-        callControlMicButtonView?.setImage(UIImage.init(named: isMicOn ? "microphone_fill" : "microphone_off"), for: .normal)
+        callControlMicButtonView?.setTitle(isMicOn ? "Mic_On" : "Mic_Off", for: .normal)
     }
     
     func onIsSendingVideoChanged() {
         print("Sending video state changed changed to: \(meetingUIClientCall?.isSendingVideo ?? false)")
         isCameraOn = meetingUIClientCall?.isSendingVideo ?? false
-        callControlCameraButtonView?.setImage(UIImage.init(named: isCameraOn ? "camera_fill" : "camera_off"), for: .normal)
+        callControlCameraButtonView?.setTitle(isCameraOn ? "Cam_On" : "Cam_Off", for: .normal)
     }
     
     func onIsHandRaisedChanged(_ participantIds: [Any]) {
@@ -293,14 +298,10 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
     
 // Delegate methods - meetingUIClientInCallScreenDelegate
     func provideControlTopBar() -> UIView? {
-        var textViewWidth:CGFloat = 58
-        var goLiveViewWidth:CGFloat = 84
         var topViewSpacing:CGFloat = 6
         
         if (UIScreen.main.bounds.width < 320)
         {
-            textViewWidth = 38
-            goLiveViewWidth = 64
             topViewSpacing = 3
         }
         
@@ -313,38 +314,12 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
         topView.isUserInteractionEnabled = true
         topView.translatesAutoresizingMaskIntoConstraints = false
         topView.spacing = topViewSpacing
-        topView.addArrangedSubview(self.getButtonForControlBar(iconName: "close_fill", selectorMethod: #selector(closeButtonClicked)))
-        
-        let textView = UILabel()
-        textView.frame = CGRect(x: 0, y: 0, width: textViewWidth, height: 19)
-        textView.text = "PRELIVE"
-        textView.font = UIFont.systemFont(ofSize: 12.0)
-        textView.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.9)
-        textView.layer.backgroundColor = UIColor(red: 0.753, green: 0.82, blue: 0.886, alpha: 1).cgColor
-        textView.layer.cornerRadius = 3
-        textView.textAlignment = .center
-        topView.addArrangedSubview(textView)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.widthAnchor.constraint(equalToConstant: textViewWidth).isActive = true
-        textView.heightAnchor.constraint(equalToConstant: 19).isActive = true
+        topView.addArrangedSubview(self.getButtonForControlBar(buttonName: "End", selectorMethod: #selector(closeButtonClicked)))
         
         let dummyView = UIView()
         topView.addArrangedSubview(dummyView)
-        
-        topView.addArrangedSubview(self.getButtonForControlBar(iconName: "people_fill", selectorMethod: #selector(peopleButtonClicked(sender:))))
-        topView.addArrangedSubview(self.getButtonForControlBar(iconName: "moreOptions", selectorMethod: #selector(moreOptionsButtonClicked(sender:))))
-        
-        let goLiveView = UILabel()
-        goLiveView.frame = CGRect(x: 0, y: 0, width: goLiveViewWidth, height: 32)
-        goLiveView.layer.backgroundColor = UIColor(red: 0.659, green: 0.831, blue: 1, alpha: 1).cgColor
-        goLiveView.layer.cornerRadius = 16
-        goLiveView.text = "Go Live"
-        goLiveView.textAlignment = .center
-        goLiveView.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.9)
-        topView.addArrangedSubview(goLiveView)
-        goLiveView.translatesAutoresizingMaskIntoConstraints = false
-        goLiveView.widthAnchor.constraint(equalToConstant: goLiveViewWidth).isActive = true
-        goLiveView.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        topView.addArrangedSubview(self.getButtonForControlBar(buttonName: "Roster", selectorMethod: #selector(peopleButtonClicked(sender:))))
+        topView.addArrangedSubview(self.getButtonForControlBar(buttonName: "More", selectorMethod: #selector(moreOptionsButtonClicked(sender:))))
         
         return topView
     }
@@ -366,23 +341,22 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
         bottomView.spacing = bottomViewSpacing
         bottomView.backgroundColor = .clear
         
-        callControlMicButtonView = self.getButtonForControlBar(iconName: isMicOn ? "microphone_fill" : "microphone_off", selectorMethod: #selector(micButtonClicked(sender:)))
-        callControlCameraButtonView = self.getButtonForControlBar(iconName: isCameraOn ? "camera_fill" : "camera_off", selectorMethod: #selector(cameraButtonClicked(sender:)))
+        callControlMicButtonView = self.getButtonForControlBar(buttonName: isMicOn ? "Mic_On" : "Mic_Off", selectorMethod: #selector(micButtonClicked(sender:)))
+        callControlCameraButtonView = self.getButtonForControlBar(buttonName: isCameraOn ? "Cam_On" : "Cam_Off", selectorMethod: #selector(cameraButtonClicked(sender:)))
         bottomView.addArrangedSubview(callControlCameraButtonView!)
         bottomView.addArrangedSubview(callControlMicButtonView!)
-        bottomView.addArrangedSubview(self.getButtonForControlBar(iconName: "speaker_fill", selectorMethod: #selector(speakerButtonClicked(sender:))))
-        bottomView.addArrangedSubview(self.getButtonForControlBar(iconName: "comments", selectorMethod: #selector(commentsButtonClicked)))
-        bottomView.addArrangedSubview(self.getButtonForControlBar(iconName: "reactions", selectorMethod: #selector(reactionsButtonClicked(sender:))))
+        bottomView.addArrangedSubview(self.getButtonForControlBar(buttonName: "Speaker", selectorMethod: #selector(speakerButtonClicked(sender:))))
+        bottomView.addArrangedSubview(self.getButtonForControlBar(buttonName: "Hand", selectorMethod: #selector(handButtonClicked(sender:))))
         return bottomView
     }
     
-    public func getButtonForControlBar(iconName : String, selectorMethod : Selector) -> UIButton
+    public func getButtonForControlBar(buttonName : String, selectorMethod : Selector) -> UIButton
     {
         let iconButton = UIButton.init(type: .custom)
         iconButton.backgroundColor = .clear
-        iconButton.setImage(UIImage.init(named: iconName), for: .normal)
+        iconButton.setTitle(buttonName, for: .normal)
         iconButton.addTarget(self, action: selectorMethod, for: .touchUpInside)
-        iconButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        iconButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
         iconButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         iconButton.layer.cornerRadius = 4;
         iconButton.layer.masksToBounds = true;
@@ -483,11 +457,7 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
         
     }
     
-    @objc public func commentsButtonClicked() {
-        self.showCallControlAction(str: "Comments tapped")
-    }
-    
-    @objc public func reactionsButtonClicked(sender: UIButton) {
+    @objc public func handButtonClicked(sender: UIButton) {
         if isHandRaised {
             let participantMri = self.handRaisedParticipants?.first as! String
             let identifier = CommunicationUserIdentifier.init(participantMri)

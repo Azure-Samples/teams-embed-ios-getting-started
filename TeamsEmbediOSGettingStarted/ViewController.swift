@@ -11,7 +11,6 @@ class ViewController: UIViewController, AcsSdkManagerDelegate {
     private var acsToken = "<ACS_TOKEN>"
     private var acsSdkManager: AcsSdkManager?
     public let statusLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
-    let acsSdkLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
     let joinAcsCallButton = Button(text: "Call 8:echo123")
     let endAcsCallButton = Button(text: "End Call")
     let stopAcsCallButton = Button(text: "Stop ACS")
@@ -33,20 +32,12 @@ class ViewController: UIViewController, AcsSdkManagerDelegate {
         statusLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         statusLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).isActive = true
         
-        acsSdkLabel.textColor = .systemGreen
-        acsSdkLabel.text = "----- ACS Calling SDK -----"
-        
-        acsSdkLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(acsSdkLabel)
-        acsSdkLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        acsSdkLabel.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 80).isActive = true
-        
         joinAcsCallButton.addTarget(self, action: #selector(joinAcsCallTapped), for: .touchUpInside)
         
         joinAcsCallButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(joinAcsCallButton)
         joinAcsCallButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        joinAcsCallButton.topAnchor.constraint(equalTo: acsSdkLabel.bottomAnchor, constant: 20).isActive = true
+        joinAcsCallButton.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 80).isActive = true
                
         endAcsCallButton.addTarget(self, action: #selector(endAcsCallTapped), for: .touchUpInside)
         

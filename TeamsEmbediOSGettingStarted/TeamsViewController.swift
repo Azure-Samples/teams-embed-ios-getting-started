@@ -13,7 +13,6 @@ class TeamsViewController: UIViewController, TeamsEmbedSdkManagerDelegate {
     private var acsToken = "<ACS_TOKEN>"
     private var teamsSdkManager: TeamsEmbedSdkManager?
     public let statusLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
-    let teamsSdkLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
     let joinMeetingButton = Button(text: "Join Meeting")
     let joinGroupCallButton = Button(text: "Join Group Call")
     let endMeetingButton = Button(text: "Hang up and Stop Teams")
@@ -35,19 +34,12 @@ class TeamsViewController: UIViewController, TeamsEmbedSdkManagerDelegate {
         statusLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         statusLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).isActive = true
         
-        teamsSdkLabel.textColor = .systemPurple
-        teamsSdkLabel.text = "----- Teams Embed SDK -----"
-        teamsSdkLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(teamsSdkLabel)
-        teamsSdkLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        teamsSdkLabel.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 80).isActive = true
-        
         joinMeetingButton.addTarget(self, action: #selector(joinMeetingTapped), for: .touchUpInside)
         
         joinMeetingButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(joinMeetingButton)
         joinMeetingButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        joinMeetingButton.topAnchor.constraint(equalTo: teamsSdkLabel.bottomAnchor, constant: 10).isActive = true
+        joinMeetingButton.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 80).isActive = true
                         
         joinGroupCallButton.addTarget(self, action: #selector(joinGroupCallTapped), for: .touchUpInside)
         

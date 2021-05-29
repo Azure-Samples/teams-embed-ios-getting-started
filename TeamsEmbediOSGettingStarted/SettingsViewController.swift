@@ -20,7 +20,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func customizeCallScreenToggled(_ sender: Any) {
-        UserDefaults.standard.setValue(showStagingToggle.isOn, forKey: "customizeCallScreenKey")
+        UserDefaults.standard.setValue(customizeCallScreenToggle.isOn, forKey: "customizeCallScreenKey")
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
