@@ -30,12 +30,14 @@ class AcsSdkManager : NSObject {
     
     private var acsToken: String?
     
-    public init(with token: String) {
-        self.acsToken = token
-    }
-    
     public func joinAcsCall()
     {
+        let acsTokenValue = UserDefaults.standard.string(forKey: "acsTokenKey") ?? "<USER_ACCESS_TOKEN>"
+        guard !acsTokenValue.trimmingCharacters(in: .whitespaces).isEmpty else {
+            self.throwAlert(error: NSError.init(domain: "InvalidAccessTokenDomain", code: 0, userInfo: [NSLocalizedDescriptionKey : "Invalid access token"]))
+            return
+        }
+        acsToken = acsTokenValue
         if (self.callClient == nil)
         {
             var userCredential: CommunicationTokenCredential?
@@ -118,5 +120,11 @@ class AcsSdkManager : NSObject {
                 }
             }
         }
+    }
+    
+    func throwAlert(error: NSError) {
+            let alert = UIAlertController(title: "SDK Status", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
     }
 }
