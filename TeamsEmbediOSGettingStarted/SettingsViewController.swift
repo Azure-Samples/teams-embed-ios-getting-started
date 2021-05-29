@@ -51,11 +51,11 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         
         if acsTokenString.isEmpty {
             UserDefaults.standard.removeObject(forKey: "acsTokenKey")
-            message = message + " & Removed ACS token"
+            message = message + " & Removed access token"
         }
         else {
             UserDefaults.standard.setValue(acsTokenString, forKey: "acsTokenKey")
-            message = message + " & Saved ACS token"
+            message = message + " & Saved access token"
         }
         
         throwAlert(message: message)
@@ -106,7 +106,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         }
         groupIdTextField.delegate = self
         
-        acsTokenTextField.placeholder = NSAttributedString.init(string: "ACS Token", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray]).string
+        acsTokenTextField.placeholder = NSAttributedString.init(string: "Access Token", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray]).string
         let acsTokenString = UserDefaults.standard.string(forKey: "acsTokenKey") ?? ""
         
         if !acsTokenString.isEmpty {

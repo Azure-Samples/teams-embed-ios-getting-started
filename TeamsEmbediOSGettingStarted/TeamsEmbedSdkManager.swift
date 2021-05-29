@@ -36,12 +36,14 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
     var callControlMicButtonView: UIButton?
     var callControlCameraButtonView: UIButton?
     
-    public init(with token: String) {
-        self.acsToken = token
-    }
-    
     public func joinMeeting() {
         
+        let acsTokenValue = UserDefaults.standard.string(forKey: "acsTokenKey") ?? "<ACS_TOKEN>"
+        guard !acsTokenValue.trimmingCharacters(in: .whitespaces).isEmpty else {
+            self.throwAlert(error: NSError.init(domain: "InvalidAccessTokenDomain", code: 0, userInfo: [NSLocalizedDescriptionKey : "Invalid access token"]))
+            return
+        }
+        acsToken = acsTokenValue
         initTeamsSdk()
         
         let meetingJoinOptions = MeetingUIClientMeetingJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true)
@@ -68,44 +70,60 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
     
     public func joinGroupCall() {
         
+        let acsTokenValue = UserDefaults.standard.string(forKey: "acsTokenKey") ?? "<ACS_TOKEN>"
+        guard !acsTokenValue.trimmingCharacters(in: .whitespaces).isEmpty else {
+            self.throwAlert(error: NSError.init(domain: "InvalidAccessTokenDomain", code: 0, userInfo: [NSLocalizedDescriptionKey : "Invalid access token"]))
+            return
+        }
+        acsToken = acsTokenValue
         initTeamsSdk()
         
         let showStagingScreen : Bool = UserDefaults.standard.bool(forKey: "showStagingKey")
-        let groupJoinOptions = MeetingUIClientGroupCallJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true)//,enableCallStagingScreen: showStagingScreen)
+        let groupJoinOptions = MeetingUIClientGroupCallJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true, enableCallStagingScreen: showStagingScreen)
         let groupCallId = UserDefaults.standard.string(forKey: "groupIdKey") ?? "<GROUP_ID>"
-        let groupLocator = MeetingUIClientGroupCallLocator(groupId: UUID.init(uuidString: groupCallId)!)
-        
-        if UserDefaults.standard.bool(forKey: "customizeCallScreenKey") {
-            meetingUIClient?.meetingUIClientInCallScreenDelegate = self
-            meetingUIClient?.meetingUIClientStagingScreenDelegate = self
-            meetingUIClient?.meetingUIClientConnectingScreenDelegate = self
+        guard !groupCallId.trimmingCharacters(in: .whitespaces).isEmpty else {
+            self.throwAlert(error: NSError.init(domain: "InvalidGroupIdDomain", code: 0, userInfo: [NSLocalizedDescriptionKey : "Invalid group id"]))
+            return
         }
-        else {
-            meetingUIClient?.meetingUIClientInCallScreenDelegate = nil
-            meetingUIClient?.meetingUIClientStagingScreenDelegate = nil
-            meetingUIClient?.meetingUIClientConnectingScreenDelegate = nil
-        }
-        
-        meetingUIClient?.join(meetingLocator: groupLocator, joinCallOptions: groupJoinOptions, completionHandler: { (meetingUIClientCall: MeetingUIClientCall?, error: Error?) in
-            if (error != nil) {
-                DispatchQueue.main.async {
-                    self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: error!.localizedDescription)
-                    self.teardownTeamsSdk()
-                }
-                print("Join meeting failed: \(error!)")
+        let groupGuid = UUID.init(uuidString: groupCallId)
+        if groupGuid != nil {
+            let groupLocator = MeetingUIClientGroupCallLocator(groupId: groupGuid!)
+            
+            if UserDefaults.standard.bool(forKey: "customizeCallScreenKey") {
+                meetingUIClient?.meetingUIClientInCallScreenDelegate = self
+                meetingUIClient?.meetingUIClientStagingScreenDelegate = self
+                meetingUIClient?.meetingUIClientConnectingScreenDelegate = self
             }
             else {
-                if (meetingUIClientCall != nil) {
-                    self.meetingUIClientCall = meetingUIClientCall
-                    self.meetingUIClientCall?.meetingUIClientCallDelegate = self
-                    self.meetingUIClientCall?.meetingUIClientCallIdentityProviderDelegate = self
-                    self.meetingUIClientCall?.meetingUIClientCallUserEventDelegate = self
-                    self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Started to join ...")
-                } else {
-                    self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Call didn't initialize")
-                }
+                meetingUIClient?.meetingUIClientInCallScreenDelegate = nil
+                meetingUIClient?.meetingUIClientStagingScreenDelegate = nil
+                meetingUIClient?.meetingUIClientConnectingScreenDelegate = nil
             }
-        })
+            
+            meetingUIClient?.join(meetingLocator: groupLocator, joinCallOptions: groupJoinOptions, completionHandler: { (meetingUIClientCall: MeetingUIClientCall?, error: Error?) in
+                if (error != nil) {
+                    DispatchQueue.main.async {
+                        self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: error!.localizedDescription)
+                        self.teardownTeamsSdk()
+                    }
+                    print("Join meeting failed: \(error!)")
+                }
+                else {
+                    if (meetingUIClientCall != nil) {
+                        self.meetingUIClientCall = meetingUIClientCall
+                        self.meetingUIClientCall?.meetingUIClientCallDelegate = self
+                        self.meetingUIClientCall?.meetingUIClientCallIdentityProviderDelegate = self
+                        self.meetingUIClientCall?.meetingUIClientCallUserEventDelegate = self
+                        self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Started to join ...")
+                    } else {
+                        self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Call didn't initialize")
+                    }
+                }
+            })
+        }
+        else {
+            self.throwAlert(error: NSError.init(domain: "InvalidGroupIdDomain", code: 0, userInfo: [NSLocalizedDescriptionKey : "Invalid group id"]))
+        }
     }
     
     public func endMeeting() {

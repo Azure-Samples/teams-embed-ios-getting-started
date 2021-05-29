@@ -8,7 +8,6 @@ import UIKit
 
 class ViewController: UIViewController, AcsSdkManagerDelegate {
 
-    private var acsToken = "<ACS_TOKEN>"
     private var acsSdkManager: AcsSdkManager?
     public let statusLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
     let joinAcsCallButton = Button(text: "Call 8:echo123")
@@ -53,8 +52,7 @@ class ViewController: UIViewController, AcsSdkManagerDelegate {
         stopAcsCallButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stopAcsCallButton.topAnchor.constraint(equalTo: endAcsCallButton.bottomAnchor, constant: 20).isActive = true
         
-        self.acsToken = UserDefaults.standard.string(forKey: "acsTokenKey") ?? ""
-        self.acsSdkManager = AcsSdkManager(with: self.acsToken)
+        self.acsSdkManager = AcsSdkManager()
         self.acsSdkManager?.acsSdkManagerDelegate = self
         
     }

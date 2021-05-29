@@ -10,7 +10,6 @@ import UIKit
 
 class TeamsViewController: UIViewController, TeamsEmbedSdkManagerDelegate {
     
-    private var acsToken = "<ACS_TOKEN>"
     private var teamsSdkManager: TeamsEmbedSdkManager?
     public let statusLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
     let joinMeetingButton = Button(text: "Join Meeting")
@@ -55,8 +54,7 @@ class TeamsViewController: UIViewController, TeamsEmbedSdkManagerDelegate {
         endMeetingButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         endMeetingButton.topAnchor.constraint(equalTo: joinGroupCallButton.bottomAnchor, constant: 20).isActive = true
         
-        self.acsToken = UserDefaults.standard.string(forKey: "acsTokenKey") ?? ""
-        self.teamsSdkManager = TeamsEmbedSdkManager(with: self.acsToken)
+        self.teamsSdkManager = TeamsEmbedSdkManager()
         self.teamsSdkManager?.teamsEmbedSdkControllerDelegate = self
     }
     
