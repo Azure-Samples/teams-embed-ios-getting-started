@@ -42,6 +42,9 @@ The following classes and interfaces used in the quickstart handle some of the m
 4. Open TeamsEmbediOSGettingStarted.xcworkspace
 5. Copy the `TeamsAppSDK.framework`, the `MeetingUIClient.framework` and other frameworks provided in the release bundle to the `Frameworks` folder in the project root
 6. Select development team under Signing and Capabilities.
+7. With the `Access Token` procured in pre-requisites, in the **TeamsEmbediOSGettingStarted/AcsSdkManager.swift**, **TeamsEmbediOSGettingStarted/TeamsEmbedSdkManager.swift**  files, replace `<USER_ACCESS_TOKEN>`.
+8. In the **TeamsEmbediOSGettingStarted/TeamsEmbedSdkManager.swift** file, replace `<MEETING_URL>` with your a Microsoft Teams meeting url.
+9. In the **TeamsEmbediOSGettingStarted/TeamsEmbedSdkManager.swift** file, replace `<GROUP_ID>` with your a goup id UUID.
 
 ## Run the sample
 

@@ -32,7 +32,7 @@ class AcsSdkManager : NSObject {
     
     public func joinAcsCall()
     {
-        let acsTokenValue = UserDefaults.standard.string(forKey: "acsTokenKey") ?? "<ACS_TOKEN>"
+        let acsTokenValue = UserDefaults.standard.string(forKey: "acsTokenKey") ?? "<USER_ACCESS_TOKEN>"
         guard !acsTokenValue.trimmingCharacters(in: .whitespaces).isEmpty else {
             self.throwAlert(error: NSError.init(domain: "InvalidAccessTokenDomain", code: 0, userInfo: [NSLocalizedDescriptionKey : "Invalid access token"]))
             return

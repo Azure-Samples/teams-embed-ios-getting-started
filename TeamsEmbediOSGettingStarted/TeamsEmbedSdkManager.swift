@@ -38,12 +38,6 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
     
     public func joinMeeting() {
         
-        let acsTokenValue = UserDefaults.standard.string(forKey: "acsTokenKey") ?? "<ACS_TOKEN>"
-        guard !acsTokenValue.trimmingCharacters(in: .whitespaces).isEmpty else {
-            self.throwAlert(error: NSError.init(domain: "InvalidAccessTokenDomain", code: 0, userInfo: [NSLocalizedDescriptionKey : "Invalid access token"]))
-            return
-        }
-        acsToken = acsTokenValue
         initTeamsSdk()
         
         let meetingJoinOptions = MeetingUIClientMeetingJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true)
@@ -70,12 +64,6 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
     
     public func joinGroupCall() {
         
-        let acsTokenValue = UserDefaults.standard.string(forKey: "acsTokenKey") ?? "<ACS_TOKEN>"
-        guard !acsTokenValue.trimmingCharacters(in: .whitespaces).isEmpty else {
-            self.throwAlert(error: NSError.init(domain: "InvalidAccessTokenDomain", code: 0, userInfo: [NSLocalizedDescriptionKey : "Invalid access token"]))
-            return
-        }
-        acsToken = acsTokenValue
         initTeamsSdk()
         
         let showStagingScreen : Bool = UserDefaults.standard.bool(forKey: "showStagingKey")
@@ -181,6 +169,13 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
         if (meetingUIClient == nil)
         {
             do {
+                let acsTokenValue = UserDefaults.standard.string(forKey: "acsTokenKey") ?? "<USER_ACCESS_TOKEN>"
+                guard !acsTokenValue.trimmingCharacters(in: .whitespaces).isEmpty else {
+                    self.throwAlert(error: NSError.init(domain: "InvalidAccessTokenDomain", code: 0, userInfo: [NSLocalizedDescriptionKey : "Invalid access token"]))
+                    return
+                }
+                acsToken = acsTokenValue
+                
                 self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkInitialized()
                 let communicationTokenRefreshOptions = CommunicationTokenRefreshOptions(initialToken: acsToken, refreshProactively: true, tokenRefresher: fetchTokenAsync(completionHandler:))
                 let credential = try CommunicationTokenCredential(withOptions: communicationTokenRefreshOptions)
@@ -241,8 +236,6 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
         print("Is hand raised changed to: \(meetingUIClientCall?.isHandRaised ?? false)")
         isHandRaised = meetingUIClientCall?.isHandRaised ?? false
         handRaisedParticipants = participantIds
-        if handRaisedParticipants?.count == 0 {
-        }
     }
 
 // Delegate methods - MeetingUIClientCallIdentityProviderDelegate
@@ -334,8 +327,8 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
         topView.spacing = topViewSpacing
         topView.addArrangedSubview(self.getButtonForControlBar(buttonName: "End", selectorMethod: #selector(closeButtonClicked)))
         
-        let dummyView = UIView()
-        topView.addArrangedSubview(dummyView)
+        let spacingView = UIView()
+        topView.addArrangedSubview(spacingView)
         topView.addArrangedSubview(self.getButtonForControlBar(buttonName: "Roster", selectorMethod: #selector(peopleButtonClicked(sender:))))
         topView.addArrangedSubview(self.getButtonForControlBar(buttonName: "More", selectorMethod: #selector(moreOptionsButtonClicked(sender:))))
         
