@@ -13,14 +13,14 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var acsTokenTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var showStagingToggle: UISwitch!
-    @IBOutlet weak var customizeCallScreenToggle: UISwitch!
+    @IBOutlet weak var customizeCallRosterScreenToggle: UISwitch!
     
     @IBAction func showStagingToggled(_ sender: Any) {
         UserDefaults.standard.setValue(showStagingToggle.isOn, forKey: "showStagingKey")
     }
     
-    @IBAction func customizeCallScreenToggled(_ sender: Any) {
-        UserDefaults.standard.setValue(customizeCallScreenToggle.isOn, forKey: "customizeCallScreenKey")
+    @IBAction func customizeCallRosterScreenToggled(_ sender: Any) {
+        UserDefaults.standard.setValue(customizeCallRosterScreenToggle.isOn, forKey: "customizeCallRosterScreenKey")
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -75,7 +75,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         configureTextFields()
         showStagingToggle.setOn(UserDefaults.standard.bool(forKey: "showStagingKey"), animated: false)
-        customizeCallScreenToggle.setOn(UserDefaults.standard.bool(forKey: "customizeCallScreenKey"), animated: false)
+        customizeCallRosterScreenToggle.setOn(UserDefaults.standard.bool(forKey: "customizeCallRosterScreenKey"), animated: false)
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(handleTapGesture))
         view.addGestureRecognizer(tapGesture)
     }

@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		8D2D96922661AA7B00E67DC5 /* TeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2D92FF266180ED00E67DC5 /* TeamsViewController.swift */; };
 		8D2D969C2661AFFA00E67DC5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2D969B2661AFFA00E67DC5 /* SettingsViewController.swift */; };
-		8D4C6E0C268D532400E19223 /* AzureMeetingUIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4C6E0B268D532400E19223 /* AzureMeetingUIClient.framework */; };
+		8D4C6E0D268D538600E19223 /* AzureMeetingUIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4C6E0B268D532400E19223 /* AzureMeetingUIClient.framework */; };
+		8D4C6E0E268D538600E19223 /* AzureMeetingUIClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4C6E0B268D532400E19223 /* AzureMeetingUIClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A81CC745258804D6001FAB57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81CC744258804D6001FAB57 /* AppDelegate.swift */; };
 		A81CC749258804D6001FAB57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81CC748258804D6001FAB57 /* ViewController.swift */; };
 		A81CC74C258804D6001FAB57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A81CC74A258804D6001FAB57 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				F890C2102661FA1500E07049 /* TeamsAppSDK.framework in Embed Frameworks */,
+				8D4C6E0E268D538600E19223 /* AzureMeetingUIClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,7 +66,7 @@
 			files = (
 				F890C20F2661FA1500E07049 /* TeamsAppSDK.framework in Frameworks */,
 				D97BAA0544D9661FA0516AF8 /* Pods_TeamsEmbediOSGettingStarted.framework in Frameworks */,
-				8D4C6E0C268D532400E19223 /* AzureMeetingUIClient.framework in Frameworks */,
+				8D4C6E0D268D538600E19223 /* AzureMeetingUIClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

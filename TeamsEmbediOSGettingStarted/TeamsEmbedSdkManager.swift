@@ -40,7 +40,9 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
         
         initTeamsSdk()
         
-        let meetingJoinOptions = MeetingUIClientMeetingJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true, enableCallStagingScreen: true, enableCallRosterDelegate: true)
+        let showStagingScreen : Bool = UserDefaults.standard.bool(forKey: "showStagingKey")
+        let customizeCallRosterScreen : Bool = UserDefaults.standard.bool(forKey: "customizeCallRosterScreenKey")
+        let meetingJoinOptions = MeetingUIClientMeetingJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true, enableCallStagingScreen: showStagingScreen, enableCallRosterDelegate: customizeCallRosterScreen)
         let meetingURLString = UserDefaults.standard.string(forKey: "meetingURLKey") ?? "<MEETING_URL>"
         let meetingLocator = MeetingUIClientTeamsMeetingLinkLocator(meetingLink: meetingURLString)
         meetingUIClient?.join(meetingLocator: meetingLocator, joinCallOptions: meetingJoinOptions, completionHandler: { (meetingUIClientCall: MeetingUIClientCall?, error: Error?) in
@@ -67,7 +69,8 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
         initTeamsSdk()
         
         let showStagingScreen : Bool = UserDefaults.standard.bool(forKey: "showStagingKey")
-        let groupJoinOptions = MeetingUIClientGroupCallJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true, enableCallStagingScreen: showStagingScreen, enableCallRosterDelegate: true)
+        let customizeCallRosterScreen : Bool = UserDefaults.standard.bool(forKey: "customizeCallRosterScreenKey")
+        let groupJoinOptions = MeetingUIClientGroupCallJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true, enableCallStagingScreen: showStagingScreen, enableCallRosterDelegate: customizeCallRosterScreen)
         let groupCallId = UserDefaults.standard.string(forKey: "groupIdKey") ?? "<GROUP_ID>"
         guard !groupCallId.trimmingCharacters(in: .whitespaces).isEmpty else {
             self.throwAlert(error: NSError.init(domain: "InvalidGroupIdDomain", code: 0, userInfo: [NSLocalizedDescriptionKey : "Invalid group id"]))
