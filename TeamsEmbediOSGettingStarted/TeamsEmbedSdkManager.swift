@@ -33,8 +33,6 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
     var isCameraOn: Bool = false
     var isHandRaised: Bool = false
     var handRaisedParticipants: [Any]?
-    var callControlMicButtonView: UIButton?
-    var callControlCameraButtonView: UIButton?
     
     public func joinMeeting() {
         
@@ -215,13 +213,11 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
     func onIsMutedChanged() {
         print("Mute state changed to: \(meetingUIClientCall?.isMuted ?? false)")
         isMicOn = !(meetingUIClientCall?.isMuted ?? false)
-        callControlMicButtonView?.setTitle(isMicOn ? "Mic_On" : "Mic_Off", for: .normal)
     }
     
     func onIsSendingVideoChanged() {
         print("Sending video state changed changed to: \(meetingUIClientCall?.isSendingVideo ?? false)")
         isCameraOn = meetingUIClientCall?.isSendingVideo ?? false
-        callControlCameraButtonView?.setTitle(isCameraOn ? "Cam_On" : "Cam_Off", for: .normal)
     }
     
     func onIsHandRaisedChanged(_ participantIds: [Any]) {
