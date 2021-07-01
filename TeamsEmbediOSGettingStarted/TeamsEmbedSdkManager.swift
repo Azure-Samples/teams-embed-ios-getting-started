@@ -54,6 +54,9 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
                     self.meetingUIClientCall?.meetingUIClientCallDelegate = self
                     self.meetingUIClientCall?.meetingUIClientCallIdentityProviderDelegate = self
                     self.meetingUIClientCall?.meetingUIClientCallUserEventDelegate = self
+                    if (customizeCallRosterScreen) {
+                        self.meetingUIClientCall?.meetingUIClientCallRosterDelegate = self
+                    }
                     self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Started to join ...")
                 } else {
                     self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Call didn't initialize")
@@ -92,6 +95,9 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
                         self.meetingUIClientCall?.meetingUIClientCallDelegate = self
                         self.meetingUIClientCall?.meetingUIClientCallIdentityProviderDelegate = self
                         self.meetingUIClientCall?.meetingUIClientCallUserEventDelegate = self
+                        if (customizeCallRosterScreen) {
+                            self.meetingUIClientCall?.meetingUIClientCallRosterDelegate = self
+                        }
                         self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Started to join ...")
                     } else {
                         self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Call didn't initialize")
