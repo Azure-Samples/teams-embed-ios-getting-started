@@ -3,24 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		8D2D96922661AA7B00E67DC5 /* TeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2D92FF266180ED00E67DC5 /* TeamsViewController.swift */; };
 		8D2D969C2661AFFA00E67DC5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2D969B2661AFFA00E67DC5 /* SettingsViewController.swift */; };
-		8D4C6E0D268D538600E19223 /* AzureMeetingUIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4C6E0B268D532400E19223 /* AzureMeetingUIClient.framework */; };
-		8D4C6E0E268D538600E19223 /* AzureMeetingUIClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4C6E0B268D532400E19223 /* AzureMeetingUIClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A81CC745258804D6001FAB57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81CC744258804D6001FAB57 /* AppDelegate.swift */; };
 		A81CC749258804D6001FAB57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81CC748258804D6001FAB57 /* ViewController.swift */; };
 		A81CC74C258804D6001FAB57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A81CC74A258804D6001FAB57 /* Main.storyboard */; };
 		A81CC74E258804D8001FAB57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A81CC74D258804D8001FAB57 /* Assets.xcassets */; };
 		A81CC751258804D8001FAB57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A81CC74F258804D8001FAB57 /* LaunchScreen.storyboard */; };
 		D97BAA0544D9661FA0516AF8 /* Pods_TeamsEmbediOSGettingStarted.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37718113AA8B764119CFCC1B /* Pods_TeamsEmbediOSGettingStarted.framework */; };
+		F8572862268E478E0006980E /* AzureMeetingUIClient.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F857285E268E47870006980E /* AzureMeetingUIClient.xcframework */; };
+		F8572863268E478E0006980E /* AzureMeetingUIClient.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F857285E268E47870006980E /* AzureMeetingUIClient.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F8572864268E47900006980E /* TeamsAppSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F857285F268E47870006980E /* TeamsAppSDK.xcframework */; };
+		F8572865268E47900006980E /* TeamsAppSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F857285F268E47870006980E /* TeamsAppSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F890C1EB266077DB00E07049 /* TeamsEmbedSdkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F890C1EA266077DA00E07049 /* TeamsEmbedSdkManager.swift */; };
 		F890C1ED26607F3E00E07049 /* AcsSdkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F890C1EC26607F3E00E07049 /* AcsSdkManager.swift */; };
-		F890C20F2661FA1500E07049 /* TeamsAppSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F890C2062661F93C00E07049 /* TeamsAppSDK.framework */; };
-		F890C2102661FA1500E07049 /* TeamsAppSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F890C2062661F93C00E07049 /* TeamsAppSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F8E5B4432627C81F00879512 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E5B4422627C81F00879512 /* Button.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,8 +31,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F890C2102661FA1500E07049 /* TeamsAppSDK.framework in Embed Frameworks */,
-				8D4C6E0E268D538600E19223 /* AzureMeetingUIClient.framework in Embed Frameworks */,
+				F8572863268E478E0006980E /* AzureMeetingUIClient.xcframework in Embed Frameworks */,
+				F8572865268E47900006980E /* TeamsAppSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,7 +43,6 @@
 		37718113AA8B764119CFCC1B /* Pods_TeamsEmbediOSGettingStarted.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamsEmbediOSGettingStarted.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D2D92FF266180ED00E67DC5 /* TeamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsViewController.swift; sourceTree = "<group>"; };
 		8D2D969B2661AFFA00E67DC5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		8D4C6E0B268D532400E19223 /* AzureMeetingUIClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AzureMeetingUIClient.framework; path = Frameworks/AzureMeetingUIClient.framework; sourceTree = "<group>"; };
 		9C132A659499855259C96D82 /* Pods-TeamsEmbediOSGettingStarted.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamsEmbediOSGettingStarted.debug.xcconfig"; path = "Target Support Files/Pods-TeamsEmbediOSGettingStarted/Pods-TeamsEmbediOSGettingStarted.debug.xcconfig"; sourceTree = "<group>"; };
 		A81CC741258804D6001FAB57 /* TeamsEmbediOSGettingStarted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamsEmbediOSGettingStarted.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A81CC744258804D6001FAB57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,9 +52,10 @@
 		A81CC750258804D8001FAB57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A81CC752258804D8001FAB57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B19FC305E7AA4E84917EB531 /* Pods-TeamsEmbediOSGettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamsEmbediOSGettingStarted.release.xcconfig"; path = "Target Support Files/Pods-TeamsEmbediOSGettingStarted/Pods-TeamsEmbediOSGettingStarted.release.xcconfig"; sourceTree = "<group>"; };
+		F857285E268E47870006980E /* AzureMeetingUIClient.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AzureMeetingUIClient.xcframework; path = Frameworks/AzureMeetingUIClient.xcframework; sourceTree = "<group>"; };
+		F857285F268E47870006980E /* TeamsAppSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TeamsAppSDK.xcframework; path = Frameworks/TeamsAppSDK.xcframework; sourceTree = "<group>"; };
 		F890C1EA266077DA00E07049 /* TeamsEmbedSdkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsEmbedSdkManager.swift; sourceTree = "<group>"; };
 		F890C1EC26607F3E00E07049 /* AcsSdkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcsSdkManager.swift; sourceTree = "<group>"; };
-		F890C2062661F93C00E07049 /* TeamsAppSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TeamsAppSDK.framework; path = Frameworks/TeamsAppSDK.framework; sourceTree = "<group>"; };
 		F8E5B4422627C81F00879512 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,9 +64,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F890C20F2661FA1500E07049 /* TeamsAppSDK.framework in Frameworks */,
+				F8572862268E478E0006980E /* AzureMeetingUIClient.xcframework in Frameworks */,
+				F8572864268E47900006980E /* TeamsAppSDK.xcframework in Frameworks */,
 				D97BAA0544D9661FA0516AF8 /* Pods_TeamsEmbediOSGettingStarted.framework in Frameworks */,
-				8D4C6E0D268D538600E19223 /* AzureMeetingUIClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,8 +121,8 @@
 		A81CC75925880EC7001FAB57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8D4C6E0B268D532400E19223 /* AzureMeetingUIClient.framework */,
-				F890C2062661F93C00E07049 /* TeamsAppSDK.framework */,
+				F857285E268E47870006980E /* AzureMeetingUIClient.xcframework */,
+				F857285F268E47870006980E /* TeamsAppSDK.xcframework */,
 				37718113AA8B764119CFCC1B /* Pods_TeamsEmbediOSGettingStarted.framework */,
 			);
 			name = Frameworks;
