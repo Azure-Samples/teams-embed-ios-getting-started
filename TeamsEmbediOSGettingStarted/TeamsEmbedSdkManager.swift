@@ -6,7 +6,7 @@
 
 import Foundation
 import AzureCommunicationCommon
-import MeetingUIClient
+import AzureMeetingUIClient
 
 public protocol TeamsEmbedSdkManagerDelegate {
     func onTeamsSdkStatusUpdated(status: String)
@@ -14,7 +14,7 @@ public protocol TeamsEmbedSdkManagerDelegate {
     func onTeamsSdkDisposed()
 }
 
-class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUIClientCallIdentityProviderDelegate, MeetingUIClientCallUserEventDelegate, MeetingUIClientInCallScreenDelegate, MeetingUIClientStagingScreenDelegate, MeetingUIClientConnectingScreenDelegate {
+class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUIClientCallIdentityProviderDelegate, MeetingUIClientCallUserEventDelegate, MeetingUIClientCallRosterDelegate {
     
     private var internalTeamsEmbedSdkControllerDelegate: TeamsEmbedSdkManagerDelegate?
     
@@ -33,14 +33,14 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
     var isCameraOn: Bool = false
     var isHandRaised: Bool = false
     var handRaisedParticipants: [Any]?
-    var callControlMicButtonView: UIButton?
-    var callControlCameraButtonView: UIButton?
     
     public func joinMeeting() {
         
         initTeamsSdk()
         
-        let meetingJoinOptions = MeetingUIClientMeetingJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true)
+        let showStagingScreen : Bool = UserDefaults.standard.bool(forKey: "showStagingKey")
+        let customizeCallRosterScreen : Bool = UserDefaults.standard.bool(forKey: "customizeCallRosterScreenKey")
+        let meetingJoinOptions = MeetingUIClientMeetingJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true, enableCallStagingScreen: showStagingScreen, enableCallRosterDelegate: customizeCallRosterScreen)
         let meetingURLString = UserDefaults.standard.string(forKey: "meetingURLKey") ?? "<MEETING_URL>"
         let meetingLocator = MeetingUIClientTeamsMeetingLinkLocator(meetingLink: meetingURLString)
         meetingUIClient?.join(meetingLocator: meetingLocator, joinCallOptions: meetingJoinOptions, completionHandler: { (meetingUIClientCall: MeetingUIClientCall?, error: Error?) in
@@ -54,6 +54,9 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
                     self.meetingUIClientCall?.meetingUIClientCallDelegate = self
                     self.meetingUIClientCall?.meetingUIClientCallIdentityProviderDelegate = self
                     self.meetingUIClientCall?.meetingUIClientCallUserEventDelegate = self
+                    if (customizeCallRosterScreen) {
+                        self.meetingUIClientCall?.meetingUIClientCallRosterDelegate = self
+                    }
                     self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Started to join ...")
                 } else {
                     self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Call didn't initialize")
@@ -67,7 +70,8 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
         initTeamsSdk()
         
         let showStagingScreen : Bool = UserDefaults.standard.bool(forKey: "showStagingKey")
-        let groupJoinOptions = MeetingUIClientGroupCallJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true, enableCallStagingScreen: showStagingScreen)
+        let customizeCallRosterScreen : Bool = UserDefaults.standard.bool(forKey: "customizeCallRosterScreenKey")
+        let groupJoinOptions = MeetingUIClientGroupCallJoinOptions(displayName: "John Smith", enablePhotoSharing: true, enableNamePlateOptionsClickDelegate: true, enableCallStagingScreen: showStagingScreen, enableCallRosterDelegate: customizeCallRosterScreen)
         let groupCallId = UserDefaults.standard.string(forKey: "groupIdKey") ?? "<GROUP_ID>"
         guard !groupCallId.trimmingCharacters(in: .whitespaces).isEmpty else {
             self.throwAlert(error: NSError.init(domain: "InvalidGroupIdDomain", code: 0, userInfo: [NSLocalizedDescriptionKey : "Invalid group id"]))
@@ -76,17 +80,6 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
         let groupGuid = UUID.init(uuidString: groupCallId)
         if groupGuid != nil {
             let groupLocator = MeetingUIClientGroupCallLocator(groupId: groupGuid!)
-            
-            if UserDefaults.standard.bool(forKey: "customizeCallScreenKey") {
-                meetingUIClient?.meetingUIClientInCallScreenDelegate = self
-                meetingUIClient?.meetingUIClientStagingScreenDelegate = self
-                meetingUIClient?.meetingUIClientConnectingScreenDelegate = self
-            }
-            else {
-                meetingUIClient?.meetingUIClientInCallScreenDelegate = nil
-                meetingUIClient?.meetingUIClientStagingScreenDelegate = nil
-                meetingUIClient?.meetingUIClientConnectingScreenDelegate = nil
-            }
             
             meetingUIClient?.join(meetingLocator: groupLocator, joinCallOptions: groupJoinOptions, completionHandler: { (meetingUIClientCall: MeetingUIClientCall?, error: Error?) in
                 if (error != nil) {
@@ -102,6 +95,9 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
                         self.meetingUIClientCall?.meetingUIClientCallDelegate = self
                         self.meetingUIClientCall?.meetingUIClientCallIdentityProviderDelegate = self
                         self.meetingUIClientCall?.meetingUIClientCallUserEventDelegate = self
+                        if (customizeCallRosterScreen) {
+                            self.meetingUIClientCall?.meetingUIClientCallRosterDelegate = self
+                        }
                         self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Started to join ...")
                     } else {
                         self.internalTeamsEmbedSdkControllerDelegate?.onTeamsSdkStatusUpdated(status: "Call didn't initialize")
@@ -223,13 +219,11 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
     func onIsMutedChanged() {
         print("Mute state changed to: \(meetingUIClientCall?.isMuted ?? false)")
         isMicOn = !(meetingUIClientCall?.isMuted ?? false)
-        callControlMicButtonView?.setTitle(isMicOn ? "Mic_On" : "Mic_Off", for: .normal)
     }
     
     func onIsSendingVideoChanged() {
         print("Sending video state changed changed to: \(meetingUIClientCall?.isSendingVideo ?? false)")
         isCameraOn = meetingUIClientCall?.isSendingVideo ?? false
-        callControlCameraButtonView?.setTitle(isCameraOn ? "Cam_On" : "Cam_Off", for: .normal)
     }
     
     func onIsHandRaisedChanged(_ participantIds: [Any]) {
@@ -292,11 +286,6 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
             completionHandler(nil)
         }
     }
-    
-    func roleFor(identifier: CommunicationIdentifier, completionHandler: @escaping (MeetingUIClientUserRole) -> Void) {
-        completionHandler(MeetingUIClientUserRole.Attendee)
-        
-    }
 
 // Delegate methods - MeetingUIClientCallUserEventDelegate
     func onNamePlateOptionsClicked(identifier: CommunicationIdentifier) {
@@ -306,222 +295,15 @@ class TeamsEmbedSdkManager : NSObject, MeetingUIClientCallDelegate, MeetingUICli
     func onParticipantViewLongPressed(identifier: CommunicationIdentifier) {
         print("Particiapnt view long pressed")
     }
-    
-// Delegate methods - meetingUIClientInCallScreenDelegate
-    func provideControlTopBar() -> UIView? {
-        var topViewSpacing:CGFloat = 6
-        
-        if (UIScreen.main.bounds.width < 320)
-        {
-            topViewSpacing = 3
-        }
-        
-        let topView = UIStackView.init()
-        topView.axis = .horizontal
-        topView.distribution = .fill
-        topView.alignment = .center
-        topView.isLayoutMarginsRelativeArrangement = true
-        topView.layoutMargins = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
-        topView.isUserInteractionEnabled = true
-        topView.translatesAutoresizingMaskIntoConstraints = false
-        topView.spacing = topViewSpacing
-        topView.addArrangedSubview(self.getButtonForControlBar(buttonName: "End", selectorMethod: #selector(closeButtonClicked)))
-        
-        let spacingView = UIView()
-        topView.addArrangedSubview(spacingView)
-        topView.addArrangedSubview(self.getButtonForControlBar(buttonName: "Roster", selectorMethod: #selector(peopleButtonClicked(sender:))))
-        topView.addArrangedSubview(self.getButtonForControlBar(buttonName: "More", selectorMethod: #selector(moreOptionsButtonClicked(sender:))))
-        
-        return topView
-    }
-    
-    func provideControlBottomBar() -> UIView? {
-        let bottomView = UIStackView.init()
-        var bottomViewSpacing:CGFloat = 12
-        
-        if (UIScreen.main.bounds.width < 320)
-        {
-            bottomViewSpacing = 3
-        }
-        
-        bottomView.axis = .horizontal
-        bottomView.distribution = .fill
-        bottomView.alignment = .center
-        bottomView.isUserInteractionEnabled = true
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.spacing = bottomViewSpacing
-        bottomView.backgroundColor = .clear
-        
-        callControlMicButtonView = self.getButtonForControlBar(buttonName: isMicOn ? "Mic_On" : "Mic_Off", selectorMethod: #selector(micButtonClicked(sender:)))
-        callControlCameraButtonView = self.getButtonForControlBar(buttonName: isCameraOn ? "Cam_On" : "Cam_Off", selectorMethod: #selector(cameraButtonClicked(sender:)))
-        bottomView.addArrangedSubview(callControlCameraButtonView!)
-        bottomView.addArrangedSubview(callControlMicButtonView!)
-        bottomView.addArrangedSubview(self.getButtonForControlBar(buttonName: "Speaker", selectorMethod: #selector(speakerButtonClicked(sender:))))
-        bottomView.addArrangedSubview(self.getButtonForControlBar(buttonName: "Hand", selectorMethod: #selector(handButtonClicked(sender:))))
-        return bottomView
-    }
-    
-    public func getButtonForControlBar(buttonName : String, selectorMethod : Selector) -> UIButton
-    {
-        let iconButton = UIButton.init(type: .custom)
-        iconButton.backgroundColor = .clear
-        iconButton.setTitle(buttonName, for: .normal)
-        iconButton.addTarget(self, action: selectorMethod, for: .touchUpInside)
-        iconButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        iconButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        iconButton.layer.cornerRadius = 4;
-        iconButton.layer.masksToBounds = true;
-        return iconButton
-    }
-    
-    func provideScreenBackgroudColor() -> UIColor? {
-        .black
-    }
-    
-    @objc public func closeButtonClicked(sender: UIButton) {
-        meetingUIClientCall?.hangUp { [weak self] (error) in
-            if error != nil {
-                self?.throwAlert(error: error! as NSError)
-            }
-        }
-    }
-    
-    @objc public func peopleButtonClicked(sender: UIButton) {
-        meetingUIClientCall?.showCallRoster { [weak self] (error) in
-            if error != nil {
-                self?.throwAlert(error: error! as NSError)
-            }
-        }
-    }
-    
-    @objc public func moreOptionsButtonClicked(sender: UIButton) {
-        self.showCallControlAction(str: "More option tapped")
-    }
-    
-    @objc public func cameraButtonClicked(sender : UIButton) {
-        if isCameraOn {
-            meetingUIClientCall?.stopVideo { [weak self] (error) in
-                if error != nil {
-                    self?.throwAlert(error: error! as NSError)
-                }
-            }
-        }
-        else {
-            meetingUIClientCall?.startVideo { [weak self] (error) in
-                if error != nil {
-                    self?.throwAlert(error: error! as NSError)
-                }
-            }
-        }
-    }
-    
-    @objc public func micButtonClicked(sender : UIButton) {
-        if isMicOn
-        {
-            meetingUIClientCall?.mute { [weak self] (error) in
-                if error != nil {
-                    self?.throwAlert(error: error! as NSError)
-                }
-            }
-        }
-        else
-        {
-            meetingUIClientCall?.unmute { [weak self] (error) in
-                if error != nil {
-                    self?.throwAlert(error: error! as NSError)
-                }
-            }
-        }
-    }
-    
-    @objc public func speakerButtonClicked(sender: UIButton) {
-        let window = UIWindow.init(frame: UIScreen.main.bounds)
-        window.rootViewController = UIViewController.init()
-        window.windowLevel = .alert + 1
-        let alert = UIAlertController(title: "Audio Route Options", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Earpiece", style: .default, handler: { (action) in
-            window.isHidden = true
-            self.meetingUIClientCall?.setAudio(route: MeetingUIClientAudioRoute.Earpiece) { [weak self] (error) in
-                if error != nil {
-                    self?.throwAlert(error: error! as NSError)
-                }
-            }
-        }))
-        alert.addAction(UIAlertAction(title: "Speaker", style: .default, handler: { (action) in
-            window.isHidden = true
-            self.meetingUIClientCall?.setAudio(route: MeetingUIClientAudioRoute.SpeakerOn) { [weak self] (error) in
-                if error != nil {
-                    self?.throwAlert(error: error! as NSError)
-                }
-            }
-        }))
-        alert.addAction(UIAlertAction(title: "Audio Off", style: .default, handler: { (action) in
-            window.isHidden = true
-            self.meetingUIClientCall?.setAudio(route: MeetingUIClientAudioRoute.AudioOff) { [weak self] (error) in
-                if error != nil {
-                    self?.throwAlert(error: error! as NSError)
-                }
-            }
-        }))
-        window.makeKeyAndVisible()
-        window.rootViewController!.present(alert, animated: true, completion: nil)
-        
-    }
-    
-    @objc public func handButtonClicked(sender: UIButton) {
-        if isHandRaised {
-            let participantMri = self.handRaisedParticipants?.first as! String
-            let identifier = CommunicationUserIdentifier.init(participantMri)
-            self.meetingUIClientCall?.lowerHand(identifier: identifier) { [weak self] (error) in
-                if error != nil {
-                    self?.throwAlert(error: error! as NSError)
-                }
-            }
-        }
-        else {
-            self.meetingUIClientCall?.raiseHand { [weak self] (error) in
-                if error != nil {
-                    self?.throwAlert(error: error! as NSError)
-                }
-            }
-        }
-    }
-    
-    @objc func showCallControlAction(str: String) {
-        DispatchQueue.main.async {
-            let window = UIWindow.init(frame: UIScreen.main.bounds)
-            window.rootViewController = UIViewController.init()
-            window.windowLevel = .alert + 1
-            let alert = UIAlertController(title: "Call Control Status", message: str, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                window.isHidden = true
-            }))
-            window.makeKeyAndVisible()
-            window.rootViewController!.present(alert, animated: true, completion: nil)
-        }
+
+// Delegate methods - MeetingUIClientCallRosterDelegate
+    func onCallParticipantCellTapped(identifier: CommunicationIdentifier) {
+        print("Call roster particiapnt view clicked")
     }
     
     func throwAlert(error: NSError) {
             let alert = UIAlertController(title: "SDK Status", message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-    }
-    
-// Delegate methods - meetingUIClientStagingScreenDelegate
-    func provideJoinButtonBackgroundColor() -> UIColor? {
-        return UIColor.init(red: 0.039, green: 0.4, blue: 0.761, alpha: 1)
-    }
-    
-    func provideJoinButtonCornerRadius() -> CGFloat {
-        return 24
-    }
-    
-    func provideStagingScreenBackgroundColor() -> UIColor? {
-        .black
-    }
-
-// Delegate methods - meetingUIClientConnectingScreenDelegate
-    func provideConnectingScreenBackgroundColor() -> UIColor? {
-        .black
     }
 }
